@@ -9,7 +9,9 @@ import DAO.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -109,6 +111,11 @@ public class Empleados {
         this.salario = salario;
     }
 
+    public Empleados() {
+    }
+    
+    
+    
     public Empleados(String idEmpleado, String nombreUsuario, String contrasenya, String nombre, String apellido, String direccion, String ciudad, String telefono, String email, double salario) {
         this.idEmpleado = idEmpleado;
         this.nombreUsuario = nombreUsuario;
@@ -124,6 +131,46 @@ public class Empleados {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////  
     
-    
+    public static void llenarEmpleados(ObservableList<Empleados> lista){
+        Conexion conexion = new Conexion();
+        Connection con = conexion.conectar();
+        ResultSet rs=null;
+        PreparedStatement stmt=null;
+        try {
+            stmt = con.prepareStatement("SELECT * FROM empleado");
+            stmt.executeQuery();
+            rs = stmt.executeQuery();
 
-}
+            while(rs.next()){
+            lista.add(
+                new Empleados(
+                    rs.getString("idEmpleado"),
+                    rs.getString("nombreUsuario"),
+                    rs.getString("contrasenya"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("direccion"),
+                    rs.getString("ciudad"),
+                    rs.getString("telefono"),
+                    rs.getString("email"),
+                    rs.getDouble("salario") ));
+
+            }
+        } catch (SQLException e) {
+            }finally{
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (stmt != null) {
+                        stmt.close();
+                    }    
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }finally{            
+                    conexion.desconectar(con);
+                }
+            }
+        
+    }
+}    
