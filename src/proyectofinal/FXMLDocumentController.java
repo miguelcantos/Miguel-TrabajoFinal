@@ -50,6 +50,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void abrirIniciarSesion(ActionEvent event) {
+        
+        
+        
         try {
             FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("pantallaModificacion.fxml"));
             Parent root1= (Parent)fxmlLoader.load();
