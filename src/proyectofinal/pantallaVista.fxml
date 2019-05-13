@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="676.0" prefWidth="1078.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.PantallaVistaController">
+   <children>
+      <ImageView fitHeight="676.0" fitWidth="1249.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagen/fondo.jpg" />
+         </image>
+      </ImageView>
+      <ToolBar layoutX="186.0" layoutY="144.0" orientation="VERTICAL" prefHeight="234.0" prefWidth="157.0" styleClass="Blanco" stylesheets="@css.css">
+        <items>
+            <Button mnemonicParsing="false" onAction="#aTableCliente" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Cliente">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#aTableMaterial" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Material" />
+            <Button mnemonicParsing="false" onAction="#aTableEmpleados" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Empleados" />
+            <Button mnemonicParsing="false" onAction="#aTablePedidos" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Pedidos" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableCliente" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0">
+         <columns>
+          <TableColumn prefWidth="75.0" text="IdCliente" />
+            <TableColumn prefWidth="75.0" text="Nombre" />
+            <TableColumn prefWidth="75.0" text="Apellidos" />
+            <TableColumn prefWidth="75.0" text="Direccion" />
+            <TableColumn prefWidth="75.0" text="Ciudad" />
+            <TableColumn prefWidth="75.0" text="Telefono" />
+            <TableColumn prefWidth="75.0" text="Email" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tableMaterial" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn prefWidth="75.0" text="C1" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableEmpleados" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
+        <columns>
+            <TableColumn prefWidth="75.0" text="IdCliente" />
+            <TableColumn prefWidth="75.0" text="Nombre" />
+            <TableColumn prefWidth="75.0" text="Apellidos" />
+            <TableColumn prefWidth="75.0" text="Direccion" />
+            <TableColumn prefWidth="75.0" text="Ciudad" />
+            <TableColumn prefWidth="75.0" text="Telefono" />
+            <TableColumn prefWidth="75.0" text="Email" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tablePedidos" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button fx:id="cerrar" layoutX="195.0" layoutY="490.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="49.0" prefWidth="126.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar" />
+   </children>
+</AnchorPane>

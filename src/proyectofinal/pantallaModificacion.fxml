@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.PantallaModificacionController">
+   <children>
+      <ImageView fitHeight="515.0" fitWidth="816.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagen/fondoMod.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="107.0" layoutY="52.0" mnemonicParsing="false" onAction="#abrirVentanaMateriales" prefHeight="138.0" prefWidth="243.0" styleClass="botonEleccion" stylesheets="@css.css" text="Materiales">
+         <font>
+            <Font size="40.0" />
+         </font></Button>
+      <Button layoutX="444.0" layoutY="52.0" mnemonicParsing="false" onAction="#abrirVentanaPedidos" prefHeight="138.0" prefWidth="243.0" styleClass="botonEleccion2" stylesheets="@css.css" text="Pedidos" />
+      <Button layoutX="107.0" layoutY="247.0" mnemonicParsing="false" onAction="#abrirVentanaClientes" prefHeight="138.0" prefWidth="243.0" styleClass="botonEleccion4" stylesheets="@css.css" text="Clientes" />
+      <Button layoutX="444.0" layoutY="247.0" mnemonicParsing="false" onAction="#abrirVentanaEmpleados" prefHeight="138.0" prefWidth="243.0" styleClass="botonEleccion3" stylesheets="@css.css" text="Empleados" />
+      <Button fx:id="salir" layoutX="350.0" layoutY="420.0" mnemonicParsing="false" onAction="#cerrarVentana" styleClass="principalBoton" stylesheets="@css.css" text="Salir" />
+   </children>
+</AnchorPane>

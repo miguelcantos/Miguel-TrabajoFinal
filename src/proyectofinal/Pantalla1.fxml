@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla1Controller">
+   <children>
+      <SplitPane dividerPositions="0.25334323922734026" layoutX="-14.0" prefHeight="636.0" prefWidth="1348.0" styleClass="FondoPantalla4" stylesheets="@css.css">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
