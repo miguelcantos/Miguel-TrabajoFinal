@@ -33,7 +33,7 @@ public class PantallaVistaController implements Initializable {
     @FXML
     private Button cerrar;
     @FXML
-    private TableView<?> tableCliente;
+    private TableView<Cliente> tableCliente;
     @FXML
     private TableView<?> tableMaterial;
     @FXML
@@ -42,8 +42,6 @@ public class PantallaVistaController implements Initializable {
     private TableView<?> tablePedidos;
 
     
-    PreparedStatement stmt= null;
-    ResultSet rs = null;
     @FXML
     private TableColumn<Empleados, String> eNomUsua;
     @FXML
@@ -58,6 +56,18 @@ public class PantallaVistaController implements Initializable {
     private TableColumn<Empleados, String> eTelefono;
     @FXML
     private TableColumn<Empleados, String> eEmail;
+    @FXML
+    private TableColumn<Cliente, String> cNombre;
+    @FXML
+    private TableColumn<Cliente, String> cApellido;
+    @FXML
+    private TableColumn<Cliente, String> cDireccion;
+    @FXML
+    private TableColumn<Cliente, String> cCiudad;
+    @FXML
+    private TableColumn<Cliente, String> cTelefono;
+    @FXML
+    private TableColumn<Cliente, String> cEmail;
     
     /**
      * Initializes the controller class.
@@ -67,6 +77,16 @@ public class PantallaVistaController implements Initializable {
        ocultarTodo();
        tableCliente.setVisible(true);
        
+       ObservableList<Cliente> lista= FXCollections.observableArrayList();
+       Cliente.llenarClientes(lista);
+       tableCliente.setItems(lista);
+   
+            cNombre.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nombre"));
+            cApellido.setCellValueFactory(new PropertyValueFactory<Cliente,String>("apellido"));
+            cDireccion.setCellValueFactory(new PropertyValueFactory<Cliente,String>("direccion"));
+            cCiudad.setCellValueFactory(new PropertyValueFactory<Cliente,String>("ciudad"));
+            cTelefono.setCellValueFactory(new PropertyValueFactory<Cliente,String>("telefono"));
+            cEmail.setCellValueFactory(new PropertyValueFactory<Cliente,String>("email"));
     }    
 
     @FXML
@@ -75,11 +95,7 @@ public class PantallaVistaController implements Initializable {
         stage.close();
         
     }
-    
-    
-    
-    
-    
+
     
     private void ocultarTodo(){
     
@@ -95,6 +111,16 @@ public class PantallaVistaController implements Initializable {
     ocultarTodo();
     tableCliente.setVisible(true);
     
+    ObservableList<Cliente> lista= FXCollections.observableArrayList();
+    Cliente.llenarClientes(lista);
+    tableCliente.setItems(lista);
+   
+            cNombre.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nombre"));
+            cApellido.setCellValueFactory(new PropertyValueFactory<Cliente,String>("apellido"));
+            cDireccion.setCellValueFactory(new PropertyValueFactory<Cliente,String>("direccion"));
+            cCiudad.setCellValueFactory(new PropertyValueFactory<Cliente,String>("ciudad"));
+            cTelefono.setCellValueFactory(new PropertyValueFactory<Cliente,String>("telefono"));
+            cEmail.setCellValueFactory(new PropertyValueFactory<Cliente,String>("email"));
     }
 
     @FXML
@@ -121,12 +147,7 @@ public class PantallaVistaController implements Initializable {
             eTelefono.setCellValueFactory(new PropertyValueFactory<Empleados,String>("telefono"));
             eEmail.setCellValueFactory(new PropertyValueFactory<Empleados,String>("email"));
             
-        eNomUsua.setResizable(false);
-    
-    
-    
-    
-    
+            //eNomUsua.setResizable(false);    
     }
     
     

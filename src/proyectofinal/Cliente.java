@@ -16,42 +16,22 @@ import javafx.collections.ObservableList;
  *
  * @author DAW
  */
-public class Empleados {
+public class Cliente {
     
-    private String idEmpleado;
-    private String nombreUsuario;
-    private String contrasenya;
+    private String idCliente;
     private String nombre;
     private String apellido;
     private String direccion;
     private String ciudad;
     private String telefono;
     private String email;
-    private double salario;
-    
-    
-    public String getIdEmpleado() {
-        return idEmpleado;
+
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getContrasenya() {
-        return contrasenya;
-    }
-
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNombre() {
@@ -102,57 +82,39 @@ public class Empleados {
         this.email = email;
     }
 
-    public double getSalario() {
-        return salario;
-    }
 
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
-    public Empleados() {
-    }
-    
-    
-    
-    public Empleados(String idEmpleado, String nombreUsuario, String contrasenya, String nombre, String apellido, String direccion, String ciudad, String telefono, String email, double salario) {
-        this.idEmpleado = idEmpleado;
-        this.nombreUsuario = nombreUsuario;
-        this.contrasenya = contrasenya;
+    public Cliente(String idCliente, String nombre, String apellido, String direccion, String ciudad, String telefono, String email) {
+        this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.telefono = telefono;
         this.email = email;
-        this.salario = salario;
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+ /////////////////////////////////////////////////////////////////////////////////////////
     
-    public static void llenarEmpleados(ObservableList<Empleados> lista){
+     public static void llenarClientes(ObservableList<Cliente> lista){
         Conexion conexion = new Conexion();
         Connection con = conexion.conectar();
         ResultSet rs=null;
         PreparedStatement stmt=null;
         try {
-            stmt = con.prepareStatement("SELECT * FROM empleado");
+            stmt = con.prepareStatement("SELECT * FROM cliente");
             stmt.executeQuery();
             rs = stmt.executeQuery();
 
             while(rs.next()){
             lista.add(
-                new Empleados(
-                    rs.getString("idEmpleado"),
-                    rs.getString("nombreUsuario"),
-                    rs.getString("contrasenya"),
+                new Cliente(
+                    rs.getString("idCliente"),
                     rs.getString("nombre"),
                     rs.getString("apellido"),
                     rs.getString("direccion"),
                     rs.getString("ciudad"),
                     rs.getString("telefono"),
-                    rs.getString("email"),
-                    rs.getDouble("salario") ));
+                    rs.getString("email") ));
 
             }
         } catch (SQLException e) {
@@ -172,4 +134,4 @@ public class Empleados {
             }
         
     }
-}    
+}

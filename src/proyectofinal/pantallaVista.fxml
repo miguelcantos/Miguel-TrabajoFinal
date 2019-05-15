@@ -28,15 +28,14 @@
             <Button mnemonicParsing="false" onAction="#aTablePedidos" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Pedidos" />
         </items>
       </ToolBar>
-      <TableView fx:id="tableCliente" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
+      <TableView fx:id="tableCliente" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0">
          <columns>
-          <TableColumn prefWidth="129.0" text="IdCliente" />
-            <TableColumn prefWidth="21.0" text="Nombre" />
-            <TableColumn prefWidth="75.0" text="Apellidos" />
-            <TableColumn prefWidth="75.0" text="Direccion" />
-            <TableColumn prefWidth="75.0" text="Ciudad" />
-            <TableColumn prefWidth="75.0" text="Telefono" />
-            <TableColumn prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="cNombre" prefWidth="72.0" text="Nombre" />
+            <TableColumn fx:id="cApellido" prefWidth="75.0" text="Apellidos" />
+            <TableColumn fx:id="cDireccion" prefWidth="107.0" text="Direccion" />
+            <TableColumn fx:id="cCiudad" prefWidth="83.0" text="Ciudad" />
+            <TableColumn fx:id="cTelefono" prefWidth="84.0" text="Telefono" />
+            <TableColumn fx:id="cEmail" prefWidth="129.0" text="Email" />
          </columns>
       </TableView>
       <TableView fx:id="tableMaterial" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
@@ -45,7 +44,7 @@
             <TableColumn prefWidth="75.0" text="C1" />
         </columns>
       </TableView>
-      <TableView fx:id="tableEmpleados" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0">
+      <TableView fx:id="tableEmpleados" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" scaleShape="false" visible="false">
         <columns>
             <TableColumn fx:id="eNomUsua" prefWidth="85.0" text="NomUsua" />
             <TableColumn fx:id="eNombre" prefWidth="88.0" text="Nombre" />
