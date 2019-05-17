@@ -40,9 +40,9 @@
       </TableView>
       <TableView fx:id="tableMaterial" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0">
         <columns>
-          <TableColumn fx:id="mIdMaterial" prefWidth="75.0" text="idMaterial" />
-            <TableColumn fx:id="mNombre" prefWidth="75.0" text="Nombre" />
-            <TableColumn fx:id="mPrecioXmetro" prefWidth="75.0" text="Precio X metro" />
+          <TableColumn fx:id="mIdMaterial" prefWidth="157.0" text="idMaterial" />
+            <TableColumn fx:id="mNombre" prefWidth="235.0" text="Nombre" />
+            <TableColumn fx:id="mPrecioXmetro" prefWidth="158.0" text="Precio X metro" />
         </columns>
       </TableView>
       <TableView fx:id="tableEmpleados" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" scaleShape="false" visible="false">
