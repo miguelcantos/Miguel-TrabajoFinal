@@ -28,7 +28,7 @@
             <Button mnemonicParsing="false" onAction="#aTablePedidos" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Pedidos" />
         </items>
       </ToolBar>
-      <TableView fx:id="tableCliente" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0">
+      <TableView fx:id="tableCliente" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
          <columns>
             <TableColumn fx:id="cNombre" prefWidth="72.0" text="Nombre" />
             <TableColumn fx:id="cApellido" prefWidth="75.0" text="Apellidos" />
@@ -38,10 +38,11 @@
             <TableColumn fx:id="cEmail" prefWidth="129.0" text="Email" />
          </columns>
       </TableView>
-      <TableView fx:id="tableMaterial" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
+      <TableView fx:id="tableMaterial" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="mIdMaterial" prefWidth="75.0" text="idMaterial" />
+            <TableColumn fx:id="mNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="mPrecioXmetro" prefWidth="75.0" text="Precio X metro" />
         </columns>
       </TableView>
       <TableView fx:id="tableEmpleados" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" scaleShape="false" visible="false">
@@ -57,8 +58,10 @@
       </TableView>
       <TableView fx:id="tablePedidos" layoutX="343.0" layoutY="150.0" prefHeight="389.0" prefWidth="551.0" visible="false">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="pIdPedido" prefWidth="122.0" text="idPedido" />
+          <TableColumn fx:id="pIdCliente" prefWidth="117.0" text="idCliente" />
+            <TableColumn fx:id="pIdLineasPedido" prefWidth="146.0" text="idLineasPedido" />
+            <TableColumn fx:id="pFechaPedido" prefWidth="165.0" text="fecha del pedido" />
         </columns>
       </TableView>
       <Button fx:id="cerrar" layoutX="195.0" layoutY="490.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="49.0" prefWidth="126.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar" />

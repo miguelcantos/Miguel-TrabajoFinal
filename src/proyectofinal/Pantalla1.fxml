@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,12 +9,173 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla1Controller">
+<AnchorPane id="AnchorPane" prefHeight="636.0" prefWidth="1387.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla1Controller">
    <children>
-      <SplitPane dividerPositions="0.25334323922734026" layoutX="-14.0" prefHeight="636.0" prefWidth="1348.0" styleClass="FondoPantalla4" stylesheets="@css.css">
+      <SplitPane dividerPositions="0.3631768953068592" prefHeight="636.0" prefWidth="1387.0" styleClass="FondoPantalla4" stylesheets="@css.css">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="474.0">
+               <children>
+                  <VBox layoutX="14.0" layoutY="31.0" prefHeight="404.0" prefWidth="215.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="idEmpleado">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Nombre Usuario">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Contraseña">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Nombre">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Apellido">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="250.0" layoutY="31.0" prefHeight="404.0" prefWidth="215.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Direccion">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Ciudad">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Telefono">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Email">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Salario">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="32.0" prefWidth="215.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <HBox layoutX="14.0" layoutY="435.0" prefHeight="44.0" prefWidth="448.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets left="45.0" right="45.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="14.0" layoutY="500.0" prefHeight="44.0" prefWidth="448.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets left="80.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets left="70.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="14.0" layoutY="567.0" prefHeight="44.0" prefWidth="448.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets left="80.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                           <HBox.margin>
+                              <Insets left="70.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css">
+               <children>
+                  <TableView layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </children>

@@ -35,11 +35,11 @@ public class PantallaVistaController implements Initializable {
     @FXML
     private TableView<Cliente> tableCliente;
     @FXML
-    private TableView<?> tableMaterial;
+    private TableView<Material> tableMaterial;
     @FXML
     private TableView<Empleados> tableEmpleados;
     @FXML
-    private TableView<?> tablePedidos;
+    private TableView<Pedido> tablePedidos;
 
     
     @FXML
@@ -68,6 +68,20 @@ public class PantallaVistaController implements Initializable {
     private TableColumn<Cliente, String> cTelefono;
     @FXML
     private TableColumn<Cliente, String> cEmail;
+    @FXML
+    private TableColumn<Material, String> mIdMaterial;
+    @FXML
+    private TableColumn<Material, String> mNombre;
+    @FXML
+    private TableColumn<Material, Double> mPrecioXmetro;
+    @FXML
+    private TableColumn<Pedido, String> pIdPedido;
+    @FXML
+    private TableColumn<Pedido, String> pIdCliente;
+    @FXML
+    private TableColumn<Pedido, String> pIdLineasPedido;
+    @FXML
+    private TableColumn<Pedido, String> pFechaPedido;
     
     /**
      * Initializes the controller class.
@@ -127,7 +141,14 @@ public class PantallaVistaController implements Initializable {
     private void aTableMaterial(ActionEvent event) {
     ocultarTodo();
     tableMaterial.setVisible(true);
-    
+    ObservableList<Material> lista= FXCollections.observableArrayList();
+       Material.llenarMateriales(lista);
+       tableMaterial.setItems(lista);
+   
+            mNombre.setCellValueFactory(new PropertyValueFactory<Material,String>("nombre"));
+            mIdMaterial.setCellValueFactory(new PropertyValueFactory<Material,String>("idMaterial"));
+            mPrecioXmetro.setCellValueFactory(new PropertyValueFactory<Material,Double>("precioXmetro"));
+            
     }
 
     @FXML
@@ -156,6 +177,13 @@ public class PantallaVistaController implements Initializable {
     private void aTablePedidos(ActionEvent event) {
     ocultarTodo();
     tablePedidos.setVisible(true);
-    
+    ObservableList<Pedido> lista= FXCollections.observableArrayList();
+       Pedido.llenarPedido(lista);
+       tablePedidos.setItems(lista);
+   
+            pIdPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idPedido"));
+            pIdCliente.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idCliente"));
+            pIdLineasPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idLineasPedido"));
+            pFechaPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("fechaPedido"));
     }
 }
