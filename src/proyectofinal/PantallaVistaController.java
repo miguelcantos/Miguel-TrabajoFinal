@@ -5,12 +5,7 @@
  */
 package proyectofinal;
 
-import DAO.Conexion;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,8 +73,7 @@ public class PantallaVistaController implements Initializable {
     private TableColumn<Pedido, String> pIdPedido;
     @FXML
     private TableColumn<Pedido, String> pIdCliente;
-    @FXML
-    private TableColumn<Pedido, String> pIdLineasPedido;
+
     @FXML
     private TableColumn<Pedido, String> pFechaPedido;
     
@@ -183,7 +177,6 @@ public class PantallaVistaController implements Initializable {
    
             pIdPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idPedido"));
             pIdCliente.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idCliente"));
-            pIdLineasPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idLineasPedido"));
             pFechaPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("fechaPedido"));
     }
 }

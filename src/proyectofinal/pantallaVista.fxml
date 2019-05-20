@@ -60,7 +60,6 @@
         <columns>
           <TableColumn fx:id="pIdPedido" prefWidth="122.0" text="idPedido" />
           <TableColumn fx:id="pIdCliente" prefWidth="117.0" text="idCliente" />
-            <TableColumn fx:id="pIdLineasPedido" prefWidth="146.0" text="idLineasPedido" />
             <TableColumn fx:id="pFechaPedido" prefWidth="165.0" text="fecha del pedido" />
         </columns>
       </TableView>

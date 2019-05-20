@@ -17,25 +17,34 @@ import javafx.collections.ObservableList;
  * @author DAW
  */
 public class LineasPedido {
-      private String idLineasPedido;
-      private String idMaterial;
+      private int idLineasPedido;
+      private int idMaterial;
+      private int idPedido;
       private Double cantidadMetros; 
       private Double precio;
 
-    public String getIdLineasPedido() {
+    public int getIdLineasPedido() {
         return idLineasPedido;
     }
 
-    public void setIdLineasPedido(String idLineasPedido) {
+    public void setIdLineasPedido(int idLineasPedido) {
         this.idLineasPedido = idLineasPedido;
     }
 
-    public String getIdMaterial() {
+    public int getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(String idMaterial) {
+    public void setIdMaterial(int idMaterial) {
         this.idMaterial = idMaterial;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
 
     public Double getCantidadMetros() {
@@ -54,12 +63,15 @@ public class LineasPedido {
         this.precio = precio;
     }
 
-    public LineasPedido(String idLineasPedido, String idMaterial, Double cantidadMetros, Double precio) {
+    public LineasPedido(int idLineasPedido, int idMaterial, int idPedido, Double cantidadMetros, Double precio) {
         this.idLineasPedido = idLineasPedido;
         this.idMaterial = idMaterial;
+        this.idPedido = idPedido;
         this.cantidadMetros = cantidadMetros;
         this.precio = precio;
     }
+
+    
       
      public static void llenarLineasPedido (ObservableList<LineasPedido> lista){
         Conexion conexion = new Conexion();
@@ -74,10 +86,11 @@ public class LineasPedido {
             while(rs.next()){
             lista.add(
                 new LineasPedido(
-                    rs.getString("idMaterial"),
-                    rs.getString("nombre"),
-                    rs.getDouble("precioXmetro"),
-                    rs.getDouble("precioXmetro") ));
+                    rs.getInt("idLineasPedido"),
+                    rs.getInt("idMaterial"),
+                    rs.getInt("idPedido"),
+                    rs.getDouble("cantidadMetros"),
+                    rs.getDouble("precio") ));
 
             }
         } catch (SQLException e) {

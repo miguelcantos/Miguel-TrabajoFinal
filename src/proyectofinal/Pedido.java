@@ -7,7 +7,6 @@ package proyectofinal;
 
 import DAO.Conexion;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +19,6 @@ import javafx.collections.ObservableList;
 public class Pedido {
       private String idPedido;
       private String idCliente;
-      private String idLineasPedido;
       private String fechaPedido;
 
     public String getIdPedido() {
@@ -39,13 +37,6 @@ public class Pedido {
         this.idCliente = idCliente;
     }
 
-    public String getIdLineasPedido() {
-        return idLineasPedido;
-    }
-
-    public void setIdLineasPedido(String idLineasPedido) {
-        this.idLineasPedido = idLineasPedido;
-    }
 
     public String getFechaPedido() {
         return fechaPedido;
@@ -55,10 +46,9 @@ public class Pedido {
         this.fechaPedido = fechaPedido;
     }
 
-    public Pedido(String idPedido, String idCliente, String idLineasPedido, String fechaPedido) {
+    public Pedido(String idPedido, String idCliente, String fechaPedido) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
-        this.idLineasPedido = idLineasPedido;
         this.fechaPedido = fechaPedido;
     }
       
@@ -77,7 +67,6 @@ public class Pedido {
                 new Pedido(
                     rs.getString("idPedido"),
                     rs.getString("idCliente"),
-                    rs.getString("idLineasPedido"),
                     rs.getDate("fechaPedido").toString() ));
 
             }

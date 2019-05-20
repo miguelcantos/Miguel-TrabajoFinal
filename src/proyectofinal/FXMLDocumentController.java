@@ -88,7 +88,7 @@ public class FXMLDocumentController implements Initializable {
                 rs = stmt.executeQuery();   
             
                 while(rs.next()){ 
-                    Empleados E = new Empleados (rs.getString("idEmpleado"), rs.getString("nombreUsuario"), rs.getString("contrasenya"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"), rs.getString("ciudad"), rs.getString("telefono"), rs.getString("email"), rs.getDouble("salario"));
+                    Empleados E = new Empleados (rs.getInt("idEmpleado"), rs.getString("nombreUsuario"), rs.getString("contrasenya"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"), rs.getString("ciudad"), rs.getString("telefono"), rs.getString("email"), rs.getDouble("salario"));
                     lista.add(E);
             }    
             } catch (SQLException e) {

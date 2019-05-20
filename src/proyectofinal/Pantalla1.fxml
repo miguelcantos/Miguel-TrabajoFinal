@@ -17,12 +17,12 @@
                <children>
                   <VBox layoutX="14.0" layoutY="31.0" prefHeight="404.0" prefWidth="215.0">
                      <children>
-                        <Label prefHeight="29.0" prefWidth="174.0" text="idEmpleado">
+                        <Label prefHeight="29.0" prefWidth="174.0" text="ID Empleado">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lIdEmpleado" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -32,7 +32,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lNombreUsuario" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -42,7 +42,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lContrasenya" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -52,7 +52,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lNombre" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -62,7 +62,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0" />
+                        <TextField fx:id="lApellido" prefHeight="32.0" prefWidth="215.0" />
                      </children>
                   </VBox>
                   <VBox layoutX="250.0" layoutY="31.0" prefHeight="404.0" prefWidth="215.0">
@@ -72,7 +72,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lDireccion" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -82,7 +82,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lCiudad" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -92,7 +92,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lTelefono" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -102,7 +102,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lEmail" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -112,26 +112,29 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="215.0">
+                        <TextField fx:id="lSalario" prefHeight="32.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </TextField>
                      </children>
                   </VBox>
-                  <HBox layoutX="14.0" layoutY="435.0" prefHeight="44.0" prefWidth="448.0">
+                  <HBox layoutX="14.0" layoutY="435.0" prefHeight="45.0" prefWidth="459.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                        <Button fx:id="bModificar" mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Modificar">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                        <Button mnemonicParsing="false" onAction="#botonEliminar" prefHeight="44.0" prefWidth="113.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Eliminar">
                            <HBox.margin>
                               <Insets left="45.0" right="45.0" />
                            </HBox.margin>
+                           <font>
+                              <Font size="7.0" />
+                           </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                        <Button fx:id="bCrearNuevo" mnemonicParsing="false" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Crear Nuevo">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -140,26 +143,12 @@
                   </HBox>
                   <HBox layoutX="14.0" layoutY="500.0" prefHeight="44.0" prefWidth="448.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Guardar">
                            <HBox.margin>
                               <Insets left="80.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
-                           <HBox.margin>
-                              <Insets left="70.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="14.0" layoutY="567.0" prefHeight="44.0" prefWidth="448.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
-                           <HBox.margin>
-                              <Insets left="80.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Button">
+                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Cerrar">
                            <HBox.margin>
                               <Insets left="70.0" />
                            </HBox.margin>
@@ -169,10 +158,18 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css">
                <children>
-                  <TableView layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
+                  <TableView fx:id="tableView" layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="tID" prefWidth="85.0" text="ID Empleado" />
+                      <TableColumn fx:id="tNomUsu" prefWidth="81.0" text="NomUsu" />
+                        <TableColumn fx:id="tContrasenya" prefWidth="79.0" text="Contrasenya" />
+                        <TableColumn fx:id="tNombre" prefWidth="68.0" text="Nombre" />
+                        <TableColumn fx:id="tApellido" prefWidth="78.0" text="Apellido" />
+                        <TableColumn fx:id="tDireccion" prefWidth="70.0" text="Direccion" />
+                        <TableColumn fx:id="tCiudad" prefWidth="85.0" text="Ciudad" />
+                        <TableColumn fx:id="tTelefono" prefWidth="107.0" text="Telefono" />
+                        <TableColumn fx:id="tEmail" prefWidth="131.0" text="Email" />
+                        <TableColumn fx:id="tSalario" prefWidth="96.0" text="Salario" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

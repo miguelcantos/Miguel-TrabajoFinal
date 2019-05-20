@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  */
 public class Empleados {
     
-    private String idEmpleado;
+    private int idEmpleado;
     private String nombreUsuario;
     private String contrasenya;
     private String nombre;
@@ -30,11 +30,11 @@ public class Empleados {
     private double salario;
     
     
-    public String getIdEmpleado() {
+    public int getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(String idEmpleado) {
+    public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
@@ -115,7 +115,7 @@ public class Empleados {
     
     
     
-    public Empleados(String idEmpleado, String nombreUsuario, String contrasenya, String nombre, String apellido, String direccion, String ciudad, String telefono, String email, double salario) {
+    public Empleados(int idEmpleado, String nombreUsuario, String contrasenya, String nombre, String apellido, String direccion, String ciudad, String telefono, String email, double salario) {
         this.idEmpleado = idEmpleado;
         this.nombreUsuario = nombreUsuario;
         this.contrasenya = contrasenya;
@@ -143,7 +143,7 @@ public class Empleados {
             while(rs.next()){
             lista.add(
                 new Empleados(
-                    rs.getString("idEmpleado"),
+                    rs.getInt("idEmpleado"),
                     rs.getString("nombreUsuario"),
                     rs.getString("contrasenya"),
                     rs.getString("nombre"),
