@@ -17,15 +17,15 @@ import javafx.collections.ObservableList;
  * @author DAW
  */
 public class Material {
-      private String idMaterial;
+      private int idMaterial;
       private String nombre;
       private Double precioXmetro;
 
-    public String getIdMaterial() {
+    public int getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(String idMaterial) {
+    public void setIdMaterial(int idMaterial) {
         this.idMaterial = idMaterial;
     }
 
@@ -45,7 +45,7 @@ public class Material {
         this.precioXmetro = precioXmetro;
     }
 
-    public Material(String idMaterial, String nombre, Double precioXmetro) {
+    public Material(int idMaterial, String nombre, Double precioXmetro) {
         this.idMaterial = idMaterial;
         this.nombre = nombre;
         this.precioXmetro = precioXmetro;
@@ -65,7 +65,7 @@ public class Material {
             while(rs.next()){
             lista.add(
                 new Material(
-                    rs.getString("idMaterial"),
+                    rs.getInt("idMaterial"),
                     rs.getString("nombre"),
                     rs.getDouble("precioXmetro") ));
 

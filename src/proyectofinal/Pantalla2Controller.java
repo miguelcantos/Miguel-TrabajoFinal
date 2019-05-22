@@ -261,6 +261,167 @@ public class Pantalla2Controller implements Initializable {
 
     @FXML
     private void botonGuardar(ActionEvent event) {
+        bGuardar.setVisible(false);
+
+        if (eleccion == 1) {
+            if (comprobarCampos() == true) {
+                Alert alert0 = new Alert(Alert.AlertType.INFORMATION);
+                alert0.setTitle("Error");
+                alert0.setHeaderText(null);
+                alert0.setContentText(" Tienes campos incorrectos ");
+                alert0.showAndWait();
+
+                todoVacio();
+                noEditable();
+            } else {
+
+                Integer id = Integer.parseInt(lIdCliente.getText());
+                PreparedStatement stmt = null;
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Estas seguro?");
+                alert.setHeaderText(null);
+                alert.setContentText("¿Seguro que quieres modificar este elemento?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    System.out.println("OK");
+                    Conexion conexion = new Conexion();
+                    Connection con = conexion.conectar();
+                    try {
+
+                        stmt = con.prepareStatement("UPDATE cliente SET nombre=?, apellido=?, direccion=?, ciudad=?, telefono=?, email=?,  WHERE idCliente=?");
+
+                        stmt.setString(1, lNombre.getText());
+                        stmt.setString(2, lApellido.getText());
+                        stmt.setString(3, lDireccion.getText());
+                        stmt.setString(4, lCiudad.getText());
+                        stmt.setString(5, lTelefono.getText());
+                        stmt.setString(6, lEmail.getText());
+                        stmt.setInt(7, id);
+                        stmt.executeUpdate();
+
+                        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                        alert1.setTitle("Correcto");
+                        alert1.setHeaderText(null);
+                        alert1.setContentText(" Se ha modificado el usuario ");
+                        alert1.showAndWait();
+
+                        rellenarTableView();
+                        tableView.refresh();
+                        noEditable();
+                        todoVacio();
+
+                    } catch (SQLException e) {
+                        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                        alert2.setTitle("Error");
+                        alert2.setHeaderText(null);
+                        alert2.setContentText(" No se ha modificado el usuario ");
+                        alert2.showAndWait();
+                        rellenarTableView();
+                        tableView.refresh();
+                        noEditable();
+                        todoVacio();
+
+                    } finally {
+                        try {
+                            if (stmt != null) {
+                                stmt.close();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        } finally {
+                            conexion.desconectar(con);
+                        }
+                    }
+                } else {
+                    System.out.println("CANCEL");
+                    noEditable();
+                    todoVacio();
+                }
+            }
+        } else if (eleccion == 2) {
+            if (comprobarCampos() == true) {
+                Alert alert0 = new Alert(Alert.AlertType.INFORMATION);
+                alert0.setTitle("Error");
+                alert0.setHeaderText(null);
+                alert0.setContentText(" Tienes campos incorrectos ");
+                alert0.showAndWait();
+
+                todoVacio();
+                noEditable();
+                lIdCliente.setVisible(true);
+            } else {
+                PreparedStatement stmt = null;
+                Alert alert3 = new Alert(Alert.AlertType.CONFIRMATION);
+                alert3.setTitle("Estas seguro");
+                alert3.setHeaderText(null);
+                alert3.setContentText("¿Seguro que quieres crear este elemento?");
+                Optional<ButtonType> result1 = alert3.showAndWait();
+                if (result1.isPresent() && result1.get() == ButtonType.OK) {
+                    System.out.println("OK");
+                    Conexion conexion = new Conexion();
+                    Connection con = conexion.conectar();
+                    try {
+
+                        stmt = con.prepareStatement("INSERT INTO cliente (nombre, apellido, direccion, ciudad, telefono, email) VALUES (?, ?, ?, ?, ?, ?)");
+
+                        stmt.setString(1, lNombre.getText());
+                        stmt.setString(2, lApellido.getText());
+                        stmt.setString(3, lDireccion.getText());
+                        stmt.setString(4, lCiudad.getText());
+                        stmt.setString(5, lTelefono.getText());
+                        stmt.setString(6, lEmail.getText());
+                        stmt.executeUpdate();
+
+                        Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
+                        alert4.setTitle("Correcto");
+                        alert4.setHeaderText(null);
+                        alert4.setContentText(" Se ha creado el usuario ");
+                        alert4.showAndWait();
+
+                        rellenarTableView();
+                        tableView.refresh();
+                        todoVacio();
+                        noEditable();
+                        lIdCliente.setVisible(true);
+
+                    } catch (SQLException e) {
+                        Alert alert5 = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert5.setTitle("ERROR");
+                        alert5.setHeaderText(null);
+                        alert5.setContentText("No se ha creado el elemento, ¿quierer borrar todo?");
+                        Optional<ButtonType> result2 = alert5.showAndWait();
+                        if (result2.isPresent() && result2.get() == ButtonType.OK) {
+                            System.out.println("OK");
+                            rellenarTableView();
+                            tableView.refresh();
+                            noEditable();
+                            todoVacio();
+                            lIdCliente.setVisible(true);
+                        } else {
+                            bGuardar.setVisible(true);
+                            siEditable();
+                        }
+
+                    } finally {
+                        try {
+                            if (stmt != null) {
+                                stmt.close();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        } finally {
+                            conexion.desconectar(con);
+                        }
+                    }
+                } else {
+                    System.out.println("CANCEL");
+                    noEditable();
+                    todoVacio();
+                }
+
+            }
+        }
+        lIdCliente.setVisible(true);
     }
 
     @FXML
