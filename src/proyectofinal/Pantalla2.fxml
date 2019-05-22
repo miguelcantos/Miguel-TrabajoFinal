@@ -21,7 +21,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lIdCliente" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -31,7 +31,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lNombre" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -41,7 +41,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lApellido" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -51,7 +51,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lDireccion" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -65,7 +65,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lCiudad" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -75,7 +75,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lTelefono" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -85,7 +85,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" prefWidth="180.0">
+                        <TextField fx:id="lEmail" prefHeight="30.0" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -94,41 +94,27 @@
                   </VBox>
                   <HBox layoutX="30.0" layoutY="384.0" prefHeight="44.0" prefWidth="396.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button">
+                        <Button fx:id="bModificar" mnemonicParsing="false" onAction="#botonModificar" prefHeight="48.0" prefWidth="117.0" styleClass="botonEleccion4a" stylesheets="@css.css" text="Modificar">
                            <HBox.margin>
                               <Insets right="30.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button" />
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button">
+                        <Button fx:id="bEliminar" mnemonicParsing="false" onAction="#botonEliminar" prefHeight="48.0" prefWidth="117.0" styleClass="botonEleccion4a" stylesheets="@css.css" text="Eliminar" />
+                        <Button fx:id="bCrearNuevo" mnemonicParsing="false" onAction="#botonCrear" prefHeight="48.0" prefWidth="117.0" styleClass="botonEleccion4a" stylesheets="@css.css" text="Crear Nuevo">
                            <HBox.margin>
                               <Insets left="30.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox layoutX="30.0" layoutY="449.0" prefHeight="44.0" prefWidth="396.0">
+                  <HBox layoutX="30.0" layoutY="466.0" prefHeight="44.0" prefWidth="396.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button">
+                        <Button fx:id="bGuardar" mnemonicParsing="false" onAction="#botonGuardar" prefHeight="48.0" prefWidth="117.0" styleClass="botonEleccion4a" stylesheets="@css.css" text="Continuar" visible="false">
                            <HBox.margin>
                               <Insets left="60.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="30.0" layoutY="509.0" prefHeight="44.0" prefWidth="396.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button">
-                           <HBox.margin>
-                              <Insets left="60.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" text="Button">
+                        <Button fx:id="bcerrar" mnemonicParsing="false" onAction="#botonCerrar" prefHeight="48.0" prefWidth="117.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar">
                            <HBox.margin>
                               <Insets left="30.0" />
                            </HBox.margin>
@@ -138,10 +124,15 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css">
                <children>
-                  <TableView layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
+                  <TableView fx:id="tableView" layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="tID" prefWidth="82.0" text="ID Cliente" />
+                      <TableColumn fx:id="tNombre" prefWidth="107.0" text="Nombre" />
+                        <TableColumn fx:id="tApellido" prefWidth="104.0" text="Apellido" />
+                        <TableColumn fx:id="tDireccion" prefWidth="136.0" text="Direccion" />
+                        <TableColumn fx:id="tCiudad" prefWidth="110.0" text="Ciudad" />
+                        <TableColumn fx:id="tTelefono" prefWidth="131.0" text="Telefono" />
+                        <TableColumn fx:id="tEmail" prefWidth="211.0" text="Email" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

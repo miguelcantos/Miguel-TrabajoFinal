@@ -121,7 +121,7 @@
                   </VBox>
                   <HBox layoutX="14.0" layoutY="435.0" prefHeight="45.0" prefWidth="459.0">
                      <children>
-                        <Button fx:id="bModificar" mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Modificar">
+                        <Button fx:id="bModificar" mnemonicParsing="false" onAction="#botonModificar" prefHeight="44.0" prefWidth="113.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Modificar">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -134,21 +134,21 @@
                               <Font size="7.0" />
                            </font>
                         </Button>
-                        <Button fx:id="bCrearNuevo" mnemonicParsing="false" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Crear Nuevo">
+                        <Button fx:id="bCrearNuevo" mnemonicParsing="false" onAction="#botonCrearNuevo" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Crear Nuevo">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox layoutX="14.0" layoutY="500.0" prefHeight="44.0" prefWidth="448.0">
+                  <HBox layoutX="20.0" layoutY="508.0" prefHeight="44.0" prefWidth="448.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Guardar">
+                        <Button fx:id="bGuardar" mnemonicParsing="false" onAction="#botonGuardar" prefHeight="44.0" prefWidth="113.0" styleClass="botonEleccion3a" stylesheets="@css.css" text="Continuar" visible="false">
                            <HBox.margin>
                               <Insets left="80.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Cerrar">
+                        <Button fx:id="bcerrar" mnemonicParsing="false" onAction="#botonCerrar" prefHeight="44.0" prefWidth="113.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar">
                            <HBox.margin>
                               <Insets left="70.0" />
                            </HBox.margin>

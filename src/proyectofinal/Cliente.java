@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  */
 public class Cliente {
     
-    private String idCliente;
+    private int idCliente;
     private String nombre;
     private String apellido;
     private String direccion;
@@ -26,11 +26,11 @@ public class Cliente {
     private String telefono;
     private String email;
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -83,7 +83,7 @@ public class Cliente {
     }
 
 
-    public Cliente(String idCliente, String nombre, String apellido, String direccion, String ciudad, String telefono, String email) {
+    public Cliente(int idCliente, String nombre, String apellido, String direccion, String ciudad, String telefono, String email) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -108,7 +108,7 @@ public class Cliente {
             while(rs.next()){
             lista.add(
                 new Cliente(
-                    rs.getString("idCliente"),
+                    rs.getInt("idCliente"),
                     rs.getString("nombre"),
                     rs.getString("apellido"),
                     rs.getString("direccion"),

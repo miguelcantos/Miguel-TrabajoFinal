@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -35,6 +36,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class Pantalla1Controller implements Initializable {
 
+    int eleccion = 0;
     @FXML
     private TextField lIdEmpleado;
     @FXML
@@ -77,28 +79,37 @@ public class Pantalla1Controller implements Initializable {
     private TableColumn<Empleados, String> tEmail;
     @FXML
     private TableColumn<Empleados, Double> tSalario;
-    
+
     ObservableList<Empleados> lista = FXCollections.observableArrayList();
 
-     private final ListChangeListener<Empleados> selectorTablaEmpleados = new ListChangeListener<Empleados>() {
+    private final ListChangeListener<Empleados> selectorTablaEmpleados = new ListChangeListener<Empleados>() {
         @Override
         public void onChanged(ListChangeListener.Change<? extends Empleados> e) {
             ponerEmpleadoSeleccionado();
         }
     };
+    @FXML
+    private Button bModificar;
+    @FXML
+    private Button bCrearNuevo;
+    @FXML
+    private Button bGuardar;
+    @FXML
+    private Button bcerrar;
 
     public Empleados getTablaEmpleadosSeleccionado() {
         if (tableView != null) {
             List<Empleados> tabla = tableView.getSelectionModel().getSelectedItems();
             if (tabla.size() == 1) {
-                final Empleados clienteSeleccionado = tabla.get(0);
-                return clienteSeleccionado;
+                final Empleados empleadosSeleccionado = tabla.get(0);
+                return empleadosSeleccionado;
             }
         }
         return null;
     }
 
     public void ponerEmpleadoSeleccionado() {
+        bGuardar.setVisible(false);
         final Empleados empleado = getTablaEmpleadosSeleccionado();
         int posicionEmpleado = lista.indexOf(empleado);
         this.noEditable();
@@ -115,38 +126,50 @@ public class Pantalla1Controller implements Initializable {
             lSalario.setText(Double.toString(empleado.getSalario()));
         }
     }
-    
-   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         rellenarTableView();
 
         final ObservableList<Empleados> tablaEmpleadosSel = tableView.getSelectionModel().getSelectedItems();
-            tablaEmpleadosSel.addListener(selectorTablaEmpleados);
-        
+        tablaEmpleadosSel.addListener(selectorTablaEmpleados);
+
         this.noEditable();
+        bGuardar.setVisible(false);
+        lIdEmpleado.setEditable(false);
     }
 
-    
-    
-    private void noEditable(){
-    lIdEmpleado.setEditable(false);
-    lNombreUsuario.setEditable(false);
-    lContrasenya.setEditable(false);
-    lNombre.setEditable(false);
-    lApellido.setEditable(false);
-    lDireccion.setEditable(false);
-    lCiudad.setEditable(false);
-    lTelefono.setEditable(false);
-    lEmail.setEditable(false);
-    lSalario.setEditable(false);
+    private void todoVacio() {
+        lIdEmpleado.setText(null);
+        lNombreUsuario.setText(null);
+        lContrasenya.setText(null);
+        lNombre.setText(null);
+        lApellido.setText(null);
+        lDireccion.setText(null);
+        lCiudad.setText(null);
+        lTelefono.setText(null);
+        lEmail.setText(null);
+        lSalario.setText(null);
     }
-    private void rellenarTableView(){
+
+    private void noEditable() {
+
+        lNombreUsuario.setEditable(false);
+        lContrasenya.setEditable(false);
+        lNombre.setEditable(false);
+        lApellido.setEditable(false);
+        lDireccion.setEditable(false);
+        lCiudad.setEditable(false);
+        lTelefono.setEditable(false);
+        lEmail.setEditable(false);
+        lSalario.setEditable(false);
+    }
+
+    private void rellenarTableView() {
         tableView.getItems().clear();
-        Empleados.llenarEmpleados (lista);
-        tableView.setItems (lista);
+        Empleados.llenarEmpleados(lista);
+        tableView.setItems(lista);
 
         tID.setCellValueFactory(new PropertyValueFactory< Empleados, Integer>("idEmpleado"));
         tNomUsu.setCellValueFactory(new PropertyValueFactory< Empleados, String>("nombreUsuario"));
@@ -159,56 +182,286 @@ public class Pantalla1Controller implements Initializable {
         tEmail.setCellValueFactory(new PropertyValueFactory< Empleados, String>("email"));
         tSalario.setCellValueFactory(new PropertyValueFactory< Empleados, Double>("salario"));
     }
-    private void siEditable(){
-    lIdEmpleado.setEditable(false);
-    lNombreUsuario.setEditable(true);
-    lContrasenya.setEditable(true);
-    lNombre.setEditable(true);
-    lApellido.setEditable(true);
-    lDireccion.setEditable(true);
-    lCiudad.setEditable(true);
-    lTelefono.setEditable(true);
-    lEmail.setEditable(true);
-    lSalario.setEditable(true);
+
+    private void siEditable() {
+
+        lNombreUsuario.setEditable(true);
+        lContrasenya.setEditable(true);
+        lNombre.setEditable(true);
+        lApellido.setEditable(true);
+        lDireccion.setEditable(true);
+        lCiudad.setEditable(true);
+        lTelefono.setEditable(true);
+        lEmail.setEditable(true);
+        lSalario.setEditable(true);
     }
 
     @FXML
     private void botonEliminar(ActionEvent event) {
-    Integer id= Integer.parseInt(lIdEmpleado.getText());
-    PreparedStatement stmt=null;
-      Alert alert = new Alert(AlertType.CONFIRMATION);
+        Integer id = Integer.parseInt(lIdEmpleado.getText());
+        PreparedStatement stmt = null;
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Eliminar");
-         alert.setHeaderText(null);
+        alert.setHeaderText(null);
         alert.setContentText("¿Seguro que quieres eliminar?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             System.out.println("OK");
             Conexion conexion = new Conexion();
             Connection con = conexion.conectar();
-             try {
+            try {
                 stmt = con.prepareStatement("DELETE from empleado where idEmpleado=?");
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Correcto");
+                alert1.setHeaderText(null);
+                alert1.setContentText(" Se ha eliminado el elemento ");
+                alert1.showAndWait();
+                
             } catch (SQLException e) {
-            }finally{
+                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Error");
+                alert2.setHeaderText(null);
+                alert2.setContentText(" No se ha  eliminado el elemento ");
+                alert2.showAndWait();
+                
+            } finally {
                 try {
                     if (stmt != null) {
                         stmt.close();
-                    }    
+                    }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
-                }finally{            
+                } finally {
                     conexion.desconectar(con);
                 }
             }
         } else {
             System.out.println("CANCEL");
         }
-        
-     rellenarTableView();
-     tableView.refresh();
-        
+
+        rellenarTableView();
+        tableView.refresh();
+        noEditable();
+        todoVacio();
+
     }
-    
-    
+
+    @FXML
+    private void botonModificar(ActionEvent event) {
+        siEditable();
+        bGuardar.setVisible(true);
+        eleccion = 1;
+    }
+
+    @FXML
+    private void botonCrearNuevo(ActionEvent event) {
+
+        todoVacio();
+        siEditable();
+
+        eleccion = 2;
+
+        bGuardar.setVisible(true);
+        lIdEmpleado.setVisible(false);
+
+    }
+
+    @FXML
+    private void botonGuardar(ActionEvent event) {
+
+        bGuardar.setVisible(false);
+
+        if (eleccion == 1) {
+            if (comprobarCampos() == true) {
+                Alert alert0 = new Alert(AlertType.INFORMATION);
+                alert0.setTitle("Error");
+                alert0.setHeaderText(null);
+                alert0.setContentText(" Tienes campos incorrectos ");
+                alert0.showAndWait();
+
+                todoVacio();
+                noEditable();
+            } else {
+
+                Integer id = Integer.parseInt(lIdEmpleado.getText());
+                Double salario = Double.parseDouble(lSalario.getText());
+                PreparedStatement stmt = null;
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Estas seguro?");
+                alert.setHeaderText(null);
+                alert.setContentText("¿Seguro que quieres modificar este elemento?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    System.out.println("OK");
+                    Conexion conexion = new Conexion();
+                    Connection con = conexion.conectar();
+                    try {
+
+                        stmt = con.prepareStatement("UPDATE empleado SET  nombreUsuario=?, contrasenya=?, nombre=?, apellido=?, direccion=?, ciudad=?, telefono=?, email=?, salario=? WHERE idEmpleado=?");
+                        stmt.setString(1, lNombreUsuario.getText());
+                        stmt.setString(2, lContrasenya.getText());
+                        stmt.setString(3, lNombre.getText());
+                        stmt.setString(4, lApellido.getText());
+                        stmt.setString(5, lDireccion.getText());
+                        stmt.setString(6, lCiudad.getText());
+                        stmt.setString(7, lTelefono.getText());
+                        stmt.setString(8, lEmail.getText());
+                        stmt.setDouble(9, salario);
+                        stmt.setInt(10, id);
+                        stmt.executeUpdate();
+
+                        Alert alert1 = new Alert(AlertType.INFORMATION);
+                        alert1.setTitle("Correcto");
+                        alert1.setHeaderText(null);
+                        alert1.setContentText(" Se ha modificado el usuario ");
+                        alert1.showAndWait();
+
+                        rellenarTableView();
+                        tableView.refresh();
+                        noEditable();
+                        todoVacio();
+
+                    } catch (SQLException e) {
+                        Alert alert2 = new Alert(AlertType.INFORMATION);
+                        alert2.setTitle("Error");
+                        alert2.setHeaderText(null);
+                        alert2.setContentText(" No se ha modificado el usuario ");
+                        alert2.showAndWait();
+                        rellenarTableView();
+                        tableView.refresh();
+                        noEditable();
+                        todoVacio();
+
+                    } finally {
+                        try {
+                            if (stmt != null) {
+                                stmt.close();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        } finally {
+                            conexion.desconectar(con);
+                        }
+                    }
+                } else {
+                    System.out.println("CANCEL");
+                    noEditable();
+                    todoVacio();
+                }
+            }
+        } else if (eleccion == 2) {
+            if (comprobarCampos() == true) {
+                Alert alert0 = new Alert(AlertType.INFORMATION);
+                alert0.setTitle("Error");
+                alert0.setHeaderText(null);
+                alert0.setContentText(" Tienes campos incorrectos ");
+                alert0.showAndWait();
+
+                todoVacio();
+                noEditable();
+                lIdEmpleado.setVisible(true);
+            } else {
+                Double salario = Double.parseDouble(lSalario.getText());
+                PreparedStatement stmt = null;
+                Alert alert3 = new Alert(AlertType.CONFIRMATION);
+                alert3.setTitle("Estas seguro");
+                alert3.setHeaderText(null);
+                alert3.setContentText("¿Seguro que quieres crear este elemento?");
+                Optional<ButtonType> result1 = alert3.showAndWait();
+                if (result1.isPresent() && result1.get() == ButtonType.OK) {
+                    System.out.println("OK");
+                    Conexion conexion = new Conexion();
+                    Connection con = conexion.conectar();
+                    try {
+
+                        stmt = con.prepareStatement("INSERT INTO empleado (nombreUsuario, contrasenya, nombre, apellido, direccion, ciudad, telefono, email, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        stmt.setString(1, lNombreUsuario.getText());
+                        stmt.setString(2, lContrasenya.getText());
+                        stmt.setString(3, lNombre.getText());
+                        stmt.setString(4, lApellido.getText());
+                        stmt.setString(5, lDireccion.getText());
+                        stmt.setString(6, lCiudad.getText());
+                        stmt.setString(7, lTelefono.getText());
+                        stmt.setString(8, lEmail.getText());
+                        stmt.setDouble(9, salario);
+                        stmt.executeUpdate();
+
+                        Alert alert4 = new Alert(AlertType.INFORMATION);
+                        alert4.setTitle("Correcto");
+                        alert4.setHeaderText(null);
+                        alert4.setContentText(" Se ha creado el usuario ");
+                        alert4.showAndWait();
+
+                        rellenarTableView();
+                        tableView.refresh();
+                        todoVacio();
+                        noEditable();
+                        lIdEmpleado.setVisible(true);
+
+                    } catch (SQLException e) {
+                        Alert alert5 = new Alert(AlertType.CONFIRMATION);
+                        alert5.setTitle("ERROR");
+                        alert5.setHeaderText(null);
+                        alert5.setContentText("No se ha creado el elemento, quierer borrar todo?");
+                        Optional<ButtonType> result2 = alert5.showAndWait();
+                        if (result2.isPresent() && result2.get() == ButtonType.OK) {
+                            System.out.println("OK");
+                            rellenarTableView();
+                            tableView.refresh();
+                            noEditable();
+                            todoVacio();
+                            lIdEmpleado.setVisible(true);
+                        } else {
+                            bGuardar.setVisible(true);
+                            siEditable();
+                        }
+
+                    } finally {
+                        try {
+                            if (stmt != null) {
+                                stmt.close();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        } finally {
+                            conexion.desconectar(con);
+                        }
+                    }
+                } else {
+                    System.out.println("CANCEL");
+                    noEditable();
+                    todoVacio();
+                }
+
+            }
+        }
+        lIdEmpleado.setVisible(true);
+    }
+
+    @FXML
+    private void botonCerrar(ActionEvent event) {
+        Stage stage = (Stage) bcerrar.getScene().getWindow();
+        stage.close();
+    }
+
+    private boolean comprobarCampos() {
+        boolean solucion = false;
+        if (lNombreUsuario.getText() == null
+                || lContrasenya.getText() == null
+                || lNombre.getText() == null
+                || lApellido.getText() == null
+                || lDireccion.getText() == null
+                || lCiudad.getText() == null
+                || lTelefono.getText() == null
+                || lEmail.getText() == null) {
+
+            solucion = true;
+
+        }
+
+        return solucion;
+    }
+
 }
