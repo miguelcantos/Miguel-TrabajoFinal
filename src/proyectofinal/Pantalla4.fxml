@@ -1,22 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1253.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla4Controller">
+<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla4Controller">
     <children>
       <SplitPane dividerPositions="0.3631768953068592" prefHeight="636.0" prefWidth="1387.0" styleClass="FondoPantalla4" stylesheets="@css.css">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="474.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="474.0">
+               <children>
+                  <VBox layoutX="36.0" layoutY="35.0" prefHeight="317.0" prefWidth="267.0">
+                     <children>
+                        <Label prefHeight="46.0" prefWidth="174.0" text="ID Pedido">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lIdPedido" prefHeight="37.0" prefWidth="331.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="46.0" prefWidth="174.0" text="ID Cliente">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lIdCliente" prefHeight="37.0" prefWidth="331.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="46.0" prefWidth="174.0" text="Fecha del pedido">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="lFechaPedido" prefHeight="34.0" prefWidth="281.0" />
+                     </children>
+                  </VBox>
+                  <HBox layoutX="21.0" layoutY="365.0" prefHeight="45.0" prefWidth="459.0">
+                     <children>
+                        <Button fx:id="bModificar" mnemonicParsing="false" onAction="#botonModificar" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Modificar" />
+                        <Button fx:id="bEliminar" mnemonicParsing="false" onAction="#botonEliminar" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Eliminar">
+                           <HBox.margin>
+                              <Insets left="45.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="bCrearNuevo" mnemonicParsing="false" onAction="#botonCrearNuevo" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Crear Nuevo">
+                           <HBox.margin>
+                              <Insets left="45.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="21.0" layoutY="437.0" prefHeight="45.0" prefWidth="459.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#botonLineasPedido" prefHeight="45.0" prefWidth="125.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Lineas Pedido">
+                           <HBox.margin>
+                              <Insets left="85.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="bcerrar" mnemonicParsing="false" onAction="#botonCerrar" prefHeight="45.0" prefWidth="116.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="21.0" layoutY="500.0" prefHeight="45.0" prefWidth="459.0">
+                     <children>
+                        <Button fx:id="bGuardar" mnemonicParsing="false" onAction="#botonGuardar" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Continuar">
+                           <HBox.margin>
+                              <Insets left="175.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css">
                <children>
-                  <TableView layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
+                  <TableView fx:id="tableView" layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="tID" prefWidth="309.0" text="ID Pedido" />
+                      <TableColumn fx:id="tIdCliente" prefWidth="310.0" text="ID Cliente" />
+                        <TableColumn fx:id="tFechaPedido" prefWidth="258.0" text="Fecha del pedido" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

@@ -203,6 +203,7 @@ public class Pantalla2Controller implements Initializable {
     private void botonEliminar(ActionEvent event) {
         Integer id = Integer.parseInt(lIdCliente.getText());
         PreparedStatement stmt = null;
+        PreparedStatement stmt2 = null;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Eliminar");
         alert.setHeaderText(null);
@@ -213,19 +214,44 @@ public class Pantalla2Controller implements Initializable {
             Conexion conexion = new Conexion();
             Connection con = conexion.conectar();
             try {
-                stmt = con.prepareStatement("DELETE from cliente where cliente=?");
+                stmt = con.prepareStatement("DELETE from pedido where cliente=?");
                 stmt.setInt(1, id);
                 stmt.executeUpdate();
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.setTitle("Correcto");
                 alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el elemento ");
+                alert1.setContentText(" Se ha eliminado el Pedido/cliente ");
                 alert1.showAndWait();
+                try {
+                    stmt2 = con.prepareStatement("DELETE from cliente where cliente=?");
+                    stmt2.setInt(1, id);
+                    stmt2.executeUpdate();
+                    Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
+                    alert10.setTitle("Correcto");
+                    alert10.setHeaderText(null);
+                    alert10.setContentText(" Se ha eliminado el elemento ");
+                    alert10.showAndWait();
+                    
+                } catch (SQLException e) {
+                    Alert alert20 = new Alert(Alert.AlertType.INFORMATION);
+                    alert20.setTitle("ERROR");
+                    alert20.setHeaderText(null);
+                    alert20.setContentText(" No se ha eliminado el Cliente/Cliente ");
+                    alert20.showAndWait();
+                } finally {
+                    try {
+                        if (stmt2 != null) {
+                            stmt2.close();
+                        }
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             } catch (SQLException e) {
                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                 alert2.setTitle("ERROR");
                 alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha eliminado el elemento ");
+                alert2.setContentText(" No se ha eliminado el Cliente ");
                 alert2.showAndWait();
             } finally {
                 try {

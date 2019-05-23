@@ -20,8 +20,8 @@ public class LineasPedido {
       private int idLineasPedido;
       private int idMaterial;
       private int idPedido;
-      private Double cantidadMetros; 
-      private Double precio;
+      private double cantidadMetros; 
+      private double precio;
 
     public int getIdLineasPedido() {
         return idLineasPedido;
@@ -73,25 +73,33 @@ public class LineasPedido {
 
     
       
-     public static void llenarLineasPedido (ObservableList<LineasPedido> lista){
+     public static void llenarLineasPedido (ObservableList<LineasPedido> lista, int id){
         Conexion conexion = new Conexion();
         Connection con = conexion.conectar();
         ResultSet rs=null;
         PreparedStatement stmt=null;
+        ResultSet rs2=null;
+        PreparedStatement stmt2=null;
         try {
-            stmt = con.prepareStatement("SELECT * FROM lineasPedido");
+            stmt = con.prepareStatement("SELECT * FROM lineasPedido where idPedido=?");
+            stmt.setInt(1, id);
             stmt.executeQuery();
             rs = stmt.executeQuery();
-
+            
             while(rs.next()){
+                stmt2 = con.prepareStatement("SELECT precioXmetro FROM material where idMaterial=? ");
+                stmt.setInt(1, rs.getInt("idMaterial"));
+                stmt2.executeQuery();
+                rs2 = stmt2.executeQuery();
+                double total = rs2.getDouble("precioXmetro") * rs.getDouble("cantidadMetros");
             lista.add(
                 new LineasPedido(
                     rs.getInt("idLineasPedido"),
                     rs.getInt("idMaterial"),
                     rs.getInt("idPedido"),
                     rs.getDouble("cantidadMetros"),
-                    rs.getDouble("precio") ));
-
+                    total)
+            );
             }
         } catch (SQLException e) {
             }finally{

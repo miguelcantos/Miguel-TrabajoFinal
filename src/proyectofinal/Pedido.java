@@ -17,23 +17,23 @@ import javafx.collections.ObservableList;
  * @author DAW
  */
 public class Pedido {
-      private String idPedido;
-      private String idCliente;
+      private int idPedido;
+      private int idCliente;
       private String fechaPedido;
 
-    public String getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(String idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -46,7 +46,7 @@ public class Pedido {
         this.fechaPedido = fechaPedido;
     }
 
-    public Pedido(String idPedido, String idCliente, String fechaPedido) {
+    public Pedido(int idPedido, int idCliente, String fechaPedido) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
         this.fechaPedido = fechaPedido;
@@ -65,8 +65,8 @@ public class Pedido {
             while(rs.next()){
             lista.add(
                 new Pedido(
-                    rs.getString("idPedido"),
-                    rs.getString("idCliente"),
+                    rs.getInt("idPedido"),
+                    rs.getInt("idCliente"),
                     rs.getDate("fechaPedido").toString() ));
 
             }

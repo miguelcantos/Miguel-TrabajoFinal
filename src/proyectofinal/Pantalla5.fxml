@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla5Controller">
+    <children>
+      <SplitPane dividerPositions="0.3631768953068592" prefHeight="636.0" prefWidth="1387.0" styleClass="FondoPantalla4" stylesheets="@css.css">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="474.0">
+               <children>
+                  <VBox layoutX="37.0" layoutY="32.0" prefHeight="344.0" prefWidth="256.0">
+                     <children>
+                        <Label prefHeight="39.0" prefWidth="177.0" text="ID Lineas del Pedido">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lIdLineasPedido" prefHeight="32.0" prefWidth="242.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin></TextField>
+                        <Label prefHeight="39.0" prefWidth="128.0" text="ID Material">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lIdMaterial" prefHeight="32.0" prefWidth="242.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin></TextField>
+                        <Label prefHeight="39.0" prefWidth="128.0" text="ID Pedido">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lIdPedido" prefHeight="32.0" prefWidth="242.0">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin></TextField>
+                        <Label prefHeight="39.0" prefWidth="172.0" text="Cantidad de Metros">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lCantidadMetros" prefHeight="32.0" prefWidth="242.0" />
+                     </children>
+                  </VBox>
+                  <HBox layoutX="37.0" layoutY="387.0" prefHeight="45.0" prefWidth="459.0">
+                     <children>
+                        <Button fx:id="bModificar" mnemonicParsing="false" onAction="#botonModificar" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Modificar" />
+                        <Button fx:id="bEliminar" mnemonicParsing="false" onAction="#botonEliminar" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Eliminar">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="bCrearNuevo" mnemonicParsing="false" onAction="#botonCrearNuevo" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Crear Nuevo">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin></Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="37.0" layoutY="454.0" prefHeight="45.0" prefWidth="459.0">
+                     <children>
+                        <Button fx:id="bGuardar" mnemonicParsing="false" onAction="#botonGuardar" prefHeight="45.0" prefWidth="116.0" styleClass="botonEleccion2a" stylesheets="@css.css" text="Continuar">
+                           <HBox.margin>
+                              <Insets left="80.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="bcerrar" mnemonicParsing="false" onAction="#botonCerrar" prefHeight="45.0" prefWidth="116.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin></Button>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="874.0" stylesheets="@css.css">
+               <children>
+                  <TableView fx:id="tableView" layoutY="-1.0" prefHeight="634.0" prefWidth="923.0">
+                    <columns>
+                      <TableColumn fx:id="tID" prefWidth="152.0" text="ID Lineas Pedido" />
+                      <TableColumn fx:id="tIdMaterial" prefWidth="158.0" text="ID Material" />
+                        <TableColumn fx:id="tIdPedido" prefWidth="209.0" text="ID Pedido" />
+                        <TableColumn fx:id="tCantidadMetros" prefWidth="178.0" text="Cantidad de Metros" />
+                        <TableColumn fx:id="tTotalProducto" prefWidth="180.0" text="Total Producto" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
