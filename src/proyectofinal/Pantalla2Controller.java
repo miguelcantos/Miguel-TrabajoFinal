@@ -128,6 +128,7 @@ public class Pantalla2Controller implements Initializable {
         tablaClienteSel.addListener(selectorTablaCliente);
 
         this.noEditable();
+        todoVacio();
         bGuardar.setVisible(false);
         lIdCliente.setEditable(false);
 

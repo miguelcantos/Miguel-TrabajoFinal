@@ -101,6 +101,7 @@ public class Pantalla3Controller implements Initializable {
         tablaMaterialSel.addListener(selectorTablaMaterial);
 
         this.noEditable();
+        todoVacio();
         bGuardar.setVisible(false);
         lIdMaterial.setEditable(false);
     }

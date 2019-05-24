@@ -138,6 +138,7 @@ public class Pantalla1Controller implements Initializable {
         tablaEmpleadosSel.addListener(selectorTablaEmpleados);
 
         this.noEditable();
+        todoVacio();
         bGuardar.setVisible(false);
         lIdEmpleado.setEditable(false);
     }
