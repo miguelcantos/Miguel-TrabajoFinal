@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -66,16 +67,17 @@ public class Pantalla5Controller implements Initializable {
     private TableColumn<LineasPedido, Double> tCantidadMetros;
     @FXML
     private TableColumn<LineasPedido, Double> tTotalProducto;
-
+    
     int eleccion = 0;
     ObservableList<LineasPedido> lista = FXCollections.observableArrayList();
-
     private final ListChangeListener<LineasPedido> selectorTablaLineasPedido = new ListChangeListener<LineasPedido>() {
         @Override
         public void onChanged(ListChangeListener.Change<? extends LineasPedido> c) {
             ponerLineasPedidoSeleccionado();
         }
     };
+    @FXML
+    private Label importante;
 
     public LineasPedido getTablaLineasPedidoSeleccionado() {
         if (tableView != null) {
@@ -106,6 +108,7 @@ public class Pantalla5Controller implements Initializable {
         lIdLineasPedido.setText(null);
         lIdMaterial.setText(null);
         lCantidadMetros.setText(null);
+        lIdPedido.setText(null);
 
     }
 
@@ -124,7 +127,9 @@ public class Pantalla5Controller implements Initializable {
         tableView.getItems().clear();
         LineasPedido.llenarLineasPedido(lista, id);
         tableView.setItems(lista);
-
+        
+        importante.setText(id1);
+        
         tID.setCellValueFactory(new PropertyValueFactory< LineasPedido, Integer>("idLineasPedido"));
         tIdMaterial.setCellValueFactory(new PropertyValueFactory< LineasPedido, Integer>("idMaterial"));
         tIdPedido.setCellValueFactory(new PropertyValueFactory< LineasPedido, Integer>("idPedido"));
@@ -234,10 +239,7 @@ public class Pantalla5Controller implements Initializable {
 
     @FXML
     private void botonCrearNuevo(ActionEvent event) {
-        if (comprobarCampos() == true) {
-            System.out.println("Error");
-
-        } else {
+       
             todoVacio();
             siEditable();
 
@@ -245,7 +247,9 @@ public class Pantalla5Controller implements Initializable {
 
             bGuardar.setVisible(true);
             lIdLineasPedido.setVisible(false);
-        }
+            lIdPedido.setEditable(false);
+            lIdPedido.setText(importante.getText());
+        
     }
 
     @FXML
