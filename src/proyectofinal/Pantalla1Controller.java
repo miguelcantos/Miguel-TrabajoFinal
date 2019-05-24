@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -216,14 +218,14 @@ public class Pantalla1Controller implements Initializable {
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.setTitle("Correcto");
                 alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el elemento ");
+                alert1.setContentText(" Se ha eliminado el empleado ");
                 alert1.showAndWait();
                 
             } catch (SQLException e) {
                  Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                 alert2.setTitle("Error");
                 alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado el elemento ");
+                alert2.setContentText(" No se ha  eliminado el empleado ");
                 alert2.showAndWait();
                 
             } finally {
@@ -273,8 +275,8 @@ public class Pantalla1Controller implements Initializable {
 
         bGuardar.setVisible(false);
 
-        if (eleccion == 1) {
-            if (comprobarCampos() == true) {
+        if (eleccion == 1 ) {
+            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == false || soloLetras(lNombre.getText()) == false || soloLetras(lApellido.getText()) == false || soloLetras(lCiudad.getText()) == false) {
                 Alert alert0 = new Alert(AlertType.INFORMATION);
                 alert0.setTitle("Error");
                 alert0.setHeaderText(null);
@@ -291,7 +293,7 @@ public class Pantalla1Controller implements Initializable {
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("Estas seguro?");
                 alert.setHeaderText(null);
-                alert.setContentText("¿Seguro que quieres modificar este elemento?");
+                alert.setContentText("¿Seguro que quieres modificar este empleado?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -315,7 +317,7 @@ public class Pantalla1Controller implements Initializable {
                         Alert alert1 = new Alert(AlertType.INFORMATION);
                         alert1.setTitle("Correcto");
                         alert1.setHeaderText(null);
-                        alert1.setContentText(" Se ha modificado el usuario ");
+                        alert1.setContentText(" Se ha modificado el empleado ");
                         alert1.showAndWait();
 
                         rellenarTableView();
@@ -327,7 +329,7 @@ public class Pantalla1Controller implements Initializable {
                         Alert alert2 = new Alert(AlertType.INFORMATION);
                         alert2.setTitle("Error");
                         alert2.setHeaderText(null);
-                        alert2.setContentText(" No se ha modificado el usuario ");
+                        alert2.setContentText(" No se ha modificado el empleado ");
                         alert2.showAndWait();
                         rellenarTableView();
                         tableView.refresh();
@@ -352,7 +354,7 @@ public class Pantalla1Controller implements Initializable {
                 }
             }
         } else if (eleccion == 2) {
-            if (comprobarCampos() == true) {
+            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == false || soloLetras(lNombre.getText()) == false || soloLetras(lApellido.getText()) == false || soloLetras(lCiudad.getText()) == false) {
                 Alert alert0 = new Alert(AlertType.INFORMATION);
                 alert0.setTitle("Error");
                 alert0.setHeaderText(null);
@@ -368,7 +370,7 @@ public class Pantalla1Controller implements Initializable {
                 Alert alert3 = new Alert(AlertType.CONFIRMATION);
                 alert3.setTitle("Estas seguro");
                 alert3.setHeaderText(null);
-                alert3.setContentText("¿Seguro que quieres crear este elemento?");
+                alert3.setContentText("¿Seguro que quieres crear este empleado?");
                 Optional<ButtonType> result1 = alert3.showAndWait();
                 if (result1.isPresent() && result1.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -391,7 +393,7 @@ public class Pantalla1Controller implements Initializable {
                         Alert alert4 = new Alert(AlertType.INFORMATION);
                         alert4.setTitle("Correcto");
                         alert4.setHeaderText(null);
-                        alert4.setContentText(" Se ha creado el usuario ");
+                        alert4.setContentText(" Se ha creado el empleado ");
                         alert4.showAndWait();
 
                         rellenarTableView();
@@ -414,6 +416,7 @@ public class Pantalla1Controller implements Initializable {
                             todoVacio();
                             lIdEmpleado.setVisible(true);
                         } else {
+                            lIdEmpleado.setVisible(false);
                             bGuardar.setVisible(true);
                             siEditable();
                         }
@@ -437,7 +440,7 @@ public class Pantalla1Controller implements Initializable {
 
             }
         }
-        lIdEmpleado.setVisible(true);
+        
     }
 
     @FXML
@@ -445,7 +448,25 @@ public class Pantalla1Controller implements Initializable {
         Stage stage = (Stage) bcerrar.getScene().getWindow();
         stage.close();
     }
+    
+    private  boolean soloNumeros(String a){
 
+          Pattern  p = Pattern.compile("[^0-9]");
+          Matcher m = p.matcher(a);
+          boolean resultado = m.find();
+
+          return resultado;
+    }
+    
+    private  boolean soloLetras(String a){
+
+          Pattern  p = Pattern.compile("[^A-Za-z]");
+          Matcher m = p.matcher(a);
+          boolean resultado = m.find();
+
+          return resultado;
+    }
+    
     private boolean comprobarCampos() {
         boolean solucion = false;
         if (lNombreUsuario.getText() == null

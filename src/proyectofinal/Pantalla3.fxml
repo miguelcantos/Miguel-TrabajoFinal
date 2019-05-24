@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1253.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="proyectofinal.Pantalla3Controller">
+<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectofinal.Pantalla3Controller">
     <children>
       <SplitPane dividerPositions="0.3631768953068592" prefHeight="636.0" prefWidth="1387.0" styleClass="FondoPantalla4" stylesheets="@css.css">
         <items>
@@ -66,7 +66,7 @@
                               <Insets left="75.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="116.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar">
+                        <Button fx:id="bCerrar" mnemonicParsing="false" onAction="#botonCerrar" prefHeight="45.0" prefWidth="116.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar">
                            <HBox.margin>
                               <Insets left="75.0" />
                            </HBox.margin>

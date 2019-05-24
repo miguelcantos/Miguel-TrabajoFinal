@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -66,6 +67,8 @@ public class Pantalla3Controller implements Initializable {
             ponerMaterialSeleccionado();
         }
     };
+    @FXML
+    private Button bCerrar;
 
     public Material getTablaMaterialSeleccionado() {
         if (tableView != null) {
@@ -394,6 +397,12 @@ public class Pantalla3Controller implements Initializable {
             }
         }
         lIdMaterial.setVisible(true);
+    }
+
+    @FXML
+    private void botonCerrar(ActionEvent event) {
+         Stage stage = (Stage) bCerrar.getScene().getWindow();
+        stage.close();
     }
 
 }

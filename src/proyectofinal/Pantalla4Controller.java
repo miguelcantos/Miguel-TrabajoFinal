@@ -6,6 +6,7 @@
 package proyectofinal;
 
 import DAO.Conexion;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,7 +21,10 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -29,6 +33,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -109,6 +114,7 @@ public class Pantalla4Controller implements Initializable {
         bGuardar.setVisible(false);
         lIdPedido.setEditable(false);
     }    
+    
     private void todoVacio() {
         lIdPedido.setText(null);
         lIdCliente.setText(null);
@@ -133,8 +139,6 @@ public class Pantalla4Controller implements Initializable {
     }
 
     private void siEditable() {
-
-        
         lIdCliente.setEditable(true);
         lFechaPedido.setEditable(true);
     }
@@ -153,14 +157,15 @@ public class Pantalla4Controller implements Initializable {
     
     @FXML
     private void botonModificar(ActionEvent event) {
-         siEditable();
+        siEditable();
+        lIdCliente.setEditable(false);
         bGuardar.setVisible(true);
         eleccion = 1;
     }
 
     @FXML
     private void botonEliminar(ActionEvent event) {
-         Integer id = Integer.parseInt(lIdPedido.getText());
+        Integer id = Integer.parseInt(lIdPedido.getText());
         PreparedStatement stmt = null;
         PreparedStatement stmt2 = null;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -250,6 +255,19 @@ public class Pantalla4Controller implements Initializable {
 
     @FXML
     private void botonLineasPedido(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("Pantalla5.fxml"));
+            Parent root1= (Parent)fxmlLoader.load();
+            Stage stage= new Stage();
+            Pantalla5Controller controller = fxmlLoader.<Pantalla5Controller>getController();
+            controller.rellenarTableView(lIdPedido.getText());
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+    
+        } catch (IOException e) {
+        }
     }
 
     @FXML

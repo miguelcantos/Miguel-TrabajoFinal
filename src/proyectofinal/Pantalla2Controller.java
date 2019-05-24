@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -27,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 
 /**
  * FXML Controller class
@@ -191,6 +194,23 @@ public class Pantalla2Controller implements Initializable {
 
         return solucion;
     }
+    private boolean soloNumeros(String a){
+
+          Pattern  p = Pattern.compile("[^0-9]");
+          Matcher m = p.matcher(a);
+          boolean resultado = m.find();
+
+          return resultado;
+    }
+    
+    private boolean soloLetras(String a){
+
+          Pattern  p = Pattern.compile("[^A-Za-z]");
+          Matcher m = p.matcher(a);
+          boolean resultado = m.find();
+
+          return resultado;
+    }
 
     @FXML
     private void botonModificar(ActionEvent event) {
@@ -290,7 +310,7 @@ public class Pantalla2Controller implements Initializable {
         bGuardar.setVisible(false);
 
         if (eleccion == 1) {
-            if (comprobarCampos() == true) {
+            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == false || soloLetras(lNombre.getText()) == false || soloLetras(lApellido.getText()) == false || soloLetras(lCiudad.getText()) == false) {
                 Alert alert0 = new Alert(Alert.AlertType.INFORMATION);
                 alert0.setTitle("Error");
                 alert0.setHeaderText(null);
@@ -306,7 +326,7 @@ public class Pantalla2Controller implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Estas seguro?");
                 alert.setHeaderText(null);
-                alert.setContentText("¿Seguro que quieres modificar este elemento?");
+                alert.setContentText("¿Seguro que quieres modificar este cliente?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -314,7 +334,7 @@ public class Pantalla2Controller implements Initializable {
                     Connection con = conexion.conectar();
                     try {
 
-                        stmt = con.prepareStatement("UPDATE cliente SET nombre=?, apellido=?, direccion=?, ciudad=?, telefono=?, email=?,  WHERE idCliente=?");
+                        stmt = con.prepareStatement("UPDATE cliente SET nombre=?, apellido=?, direccion=?, ciudad=?, telefono=?, email=?  WHERE idCliente=?");
 
                         stmt.setString(1, lNombre.getText());
                         stmt.setString(2, lApellido.getText());
@@ -328,7 +348,7 @@ public class Pantalla2Controller implements Initializable {
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                         alert1.setTitle("Correcto");
                         alert1.setHeaderText(null);
-                        alert1.setContentText(" Se ha modificado el usuario ");
+                        alert1.setContentText(" Se ha modificado el cliente ");
                         alert1.showAndWait();
 
                         rellenarTableView();
@@ -340,7 +360,7 @@ public class Pantalla2Controller implements Initializable {
                         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setTitle("Error");
                         alert2.setHeaderText(null);
-                        alert2.setContentText(" No se ha modificado el usuario ");
+                        alert2.setContentText(" No se ha modificado el cliente ");
                         alert2.showAndWait();
                         rellenarTableView();
                         tableView.refresh();
@@ -365,7 +385,7 @@ public class Pantalla2Controller implements Initializable {
                 }
             }
         } else if (eleccion == 2) {
-            if (comprobarCampos() == true) {
+            if (comprobarCampos() == true|| soloNumeros(lTelefono.getText()) == false || soloLetras(lNombre.getText()) == false || soloLetras(lApellido.getText()) == false || soloLetras(lCiudad.getText()) == false) {
                 Alert alert0 = new Alert(Alert.AlertType.INFORMATION);
                 alert0.setTitle("Error");
                 alert0.setHeaderText(null);

@@ -5,7 +5,15 @@
  */
 package proyectofinal;
 
+import DAO.Conexion;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -179,4 +188,176 @@ public class PantallaVistaController implements Initializable {
             pIdCliente.setCellValueFactory(new PropertyValueFactory<Pedido,String>("idCliente"));
             pFechaPedido.setCellValueFactory(new PropertyValueFactory<Pedido,String>("fechaPedido"));
     }
-}
+
+    
+    
+    private String generarDatos(){
+        String cadena = "";   
+        Conexion conexion = new Conexion();
+        Connection con = conexion.conectar();
+        ResultSet rs=null;
+        PreparedStatement stmt=null;
+        try {
+            stmt = con.prepareStatement("SELECT * FROM cliente");
+            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+            
+                cadena+= "CLIENTE" + "\n";
+                cadena+= "nombre: " + rs.getString("nombre") + "\n";
+                cadena+= "apellido: " + rs.getString("apellido") + "\n";
+                cadena+= "direccion: " + rs.getString("direccion") + "\n";
+                cadena+= "ciudad: " + rs.getString("ciudad") + "\n";
+                cadena+= "telefono: " + rs.getString("telefono") + "\n";
+                cadena+= "email: " + rs.getString("email")  + "\n";
+                cadena+= "\n";
+
+            }
+        } catch (SQLException e) {
+            }finally{
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (stmt != null) {
+                        stmt.close();
+                    }    
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }finally{            
+                    conexion.desconectar(con);
+                }
+            }
+        rs=null;
+        stmt=null;
+        con = conexion.conectar();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM empleado");
+            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+            
+                cadena+= "EMPLEADO" + "\n";
+                cadena+= "nombre usuario: " + rs.getString("nombreUsuario") + "\n";
+                cadena+= "nombre: " +  rs.getString("nombre") + "\n";
+                cadena+= "apellido: " + rs.getString("apellido") + "\n";
+                cadena+= "direccion: " + rs.getString("direccion") + "\n";
+                cadena+= "ciudad: " +  rs.getString("ciudad") + "\n";
+                cadena+= "telefono: " + rs.getString("telefono") + "\n";
+                cadena+= "email: " + rs.getString("email")  + "\n";
+                cadena+= "\n";
+
+            }
+        } catch (SQLException e) {
+            }finally{
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (stmt != null) {
+                        stmt.close();
+                    }    
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }finally{            
+                    conexion.desconectar(con);
+                }
+            }
+        rs=null;
+        stmt=null;
+        con = conexion.conectar();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM pedido");
+            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+                cadena+= "PEDIDO" + "\n";
+                cadena+= "idPEdido: " + rs.getInt("idPedido") + "\n";
+                cadena+= "idCliente: " + rs.getInt("idCliente") + "\n";
+                cadena+= "Fecha de pedido: " + rs.getDate("fechaPedido").toString()  + "\n";
+                cadena+= "\n";
+            }
+        } catch (SQLException e) {
+            }finally{
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (stmt != null) {
+                        stmt.close();
+                    }    
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }finally{            
+                    conexion.desconectar(con);
+                }
+            }
+        rs=null;
+        stmt=null;
+        con = conexion.conectar();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM material");
+            stmt.executeQuery();
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+                cadena+= "MATERIAL" + "\n";
+                cadena+= "idMaterial: " + rs.getInt("idMaterial") + "\n";
+                cadena+= "Nombre: " + rs.getString("nombre") + "\n";
+                cadena+= "Precio x metro: " + rs.getDouble("precioXmetro")  + "\n";
+                cadena+= "\n";
+            }
+        } catch (SQLException e) {
+            }finally{
+                try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    if (stmt != null) {
+                        stmt.close();
+                    }    
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }finally{            
+                    conexion.desconectar(con);
+                }
+            }
+    return cadena;}
+    
+    
+    @FXML
+    private void botonImprimir(ActionEvent event) {
+        
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Guardar Fichero");
+        fc.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter(".txt"));
+        Stage stage = (Stage) cerrar.getScene().getWindow();
+        File selectFile = fc.showSaveDialog(stage);
+        FileWriter fw = null;
+        String cadena = "";
+        if (selectFile != null) {
+            try {
+                fw = new FileWriter(selectFile);
+                cadena = generarDatos() ;
+                fw.write(cadena);
+            } catch (IOException ex) {
+                System.out.println("error al escribir");
+            } finally {
+                try {
+                    if (fw != null) {
+                        fw.close();
+                    }
+                } catch (Exception ex) {
+                    System.out.println("error");
+                }
+            }
+        }
+    }
+        
+        
+    }
+

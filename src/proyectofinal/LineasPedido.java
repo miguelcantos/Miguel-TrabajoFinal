@@ -20,8 +20,8 @@ public class LineasPedido {
       private int idLineasPedido;
       private int idMaterial;
       private int idPedido;
-      private double cantidadMetros; 
-      private double precio;
+      private Double cantidadMetros; 
+      private Double precio;
 
     public int getIdLineasPedido() {
         return idLineasPedido;
@@ -78,9 +78,12 @@ public class LineasPedido {
         Connection con = conexion.conectar();
         ResultSet rs=null;
         PreparedStatement stmt=null;
+        
         ResultSet rs2=null;
         PreparedStatement stmt2=null;
+       
         try {
+            
             stmt = con.prepareStatement("SELECT * FROM lineasPedido where idPedido=?");
             stmt.setInt(1, id);
             stmt.executeQuery();
@@ -88,11 +91,14 @@ public class LineasPedido {
             
             while(rs.next()){
                 stmt2 = con.prepareStatement("SELECT precioXmetro FROM material where idMaterial=? ");
-                stmt.setInt(1, rs.getInt("idMaterial"));
+                stmt2.setInt(1, rs.getInt("idMaterial"));
                 stmt2.executeQuery();
                 rs2 = stmt2.executeQuery();
+                rs2.next();
                 double total = rs2.getDouble("precioXmetro") * rs.getDouble("cantidadMetros");
+                System.out.println();
             lista.add(
+                   
                 new LineasPedido(
                     rs.getInt("idLineasPedido"),
                     rs.getInt("idMaterial"),
@@ -101,7 +107,8 @@ public class LineasPedido {
                     total)
             );
             }
-        } catch (SQLException e) {
+            } catch (SQLException e) {
+              
             }finally{
                 try {
                     if (rs != null) {

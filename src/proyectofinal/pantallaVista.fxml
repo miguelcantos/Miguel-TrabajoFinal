@@ -64,5 +64,6 @@
         </columns>
       </TableView>
       <Button fx:id="cerrar" layoutX="195.0" layoutY="490.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="49.0" prefWidth="126.0" styleClass="cerrarBoton" stylesheets="@css.css" text="Cerrar" />
+      <Button layoutX="195.0" layoutY="433.0" mnemonicParsing="false" onAction="#botonImprimir" prefHeight="49.0" prefWidth="126.0" styleClass="editBoton" stylesheets="@css.css" text="Imprimir" />
    </children>
 </AnchorPane>
