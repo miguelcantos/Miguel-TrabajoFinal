@@ -67,7 +67,7 @@ public class Pantalla5Controller implements Initializable {
     @FXML
     private TableColumn<LineasPedido, Double> tTotalProducto;
 
-     int eleccion = 0;
+    int eleccion = 0;
     ObservableList<LineasPedido> lista = FXCollections.observableArrayList();
 
     private final ListChangeListener<LineasPedido> selectorTablaLineasPedido = new ListChangeListener<LineasPedido>() {
@@ -76,6 +76,7 @@ public class Pantalla5Controller implements Initializable {
             ponerLineasPedidoSeleccionado();
         }
     };
+
     public LineasPedido getTablaLineasPedidoSeleccionado() {
         if (tableView != null) {
             List<LineasPedido> tabla = tableView.getSelectionModel().getSelectedItems();
@@ -97,15 +98,15 @@ public class Pantalla5Controller implements Initializable {
             lIdMaterial.setText(Integer.toString(lineasPedido.getIdMaterial()));
             lIdPedido.setText(Integer.toString(lineasPedido.getIdPedido()));
             lCantidadMetros.setText(Double.toString(lineasPedido.getCantidadMetros()));
-            
+
         }
     }
-    
-     private void todoVacio() {
+
+    private void todoVacio() {
         lIdLineasPedido.setText(null);
         lIdMaterial.setText(null);
         lCantidadMetros.setText(null);
-       
+
     }
 
     private void noEditable() {
@@ -114,14 +115,11 @@ public class Pantalla5Controller implements Initializable {
         lIdMaterial.setEditable(false);
         lIdPedido.setEditable(false);
         lCantidadMetros.setEditable(false);
-        
+
     }
-    
-    
-    
+
     public void rellenarTableView(String id1) {
-        
-        
+
         Integer id = Integer.parseInt(id1);
         tableView.getItems().clear();
         LineasPedido.llenarLineasPedido(lista, id);
@@ -132,7 +130,7 @@ public class Pantalla5Controller implements Initializable {
         tIdPedido.setCellValueFactory(new PropertyValueFactory< LineasPedido, Integer>("idPedido"));
         tCantidadMetros.setCellValueFactory(new PropertyValueFactory< LineasPedido, Double>("cantidadMetros"));
         tTotalProducto.setCellValueFactory(new PropertyValueFactory< LineasPedido, Double>("precio"));
-        
+
         final ObservableList<LineasPedido> tablaLineasPedidoSel = tableView.getSelectionModel().getSelectedItems();
         tablaLineasPedidoSel.addListener(selectorTablaLineasPedido);
 
@@ -144,13 +142,14 @@ public class Pantalla5Controller implements Initializable {
     private void siEditable() {
         lIdMaterial.setEditable(true);
         lCantidadMetros.setEditable(true);
-       
+
     }
+
     private boolean comprobarCampos() {
         boolean solucion = false;
         if (lCantidadMetros.getText() == null
-             ||  lIdPedido.getText() == null
-              || lIdMaterial.getText() == null  ) {
+                || lIdPedido.getText() == null
+                || lIdMaterial.getText() == null) {
 
             solucion = true;
 
@@ -158,95 +157,100 @@ public class Pantalla5Controller implements Initializable {
 
         return solucion;
     }
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
+
+    }
 
     @FXML
     private void botonModificar(ActionEvent event) {
-        if(comprobarCampos()==true){
+        if (comprobarCampos() == true) {
             System.out.println("Error");
-        
-        }else{
-        siEditable();
-        lIdMaterial.setEditable(false);
-        lIdPedido.setEditable(false);
-        bGuardar.setVisible(true);
-        eleccion = 1;}
+
+        } else {
+            siEditable();
+            lIdMaterial.setEditable(false);
+            lIdPedido.setEditable(false);
+            bGuardar.setVisible(true);
+            eleccion = 1;
+        }
     }
 
     @FXML
     private void botonEliminar(ActionEvent event) {
-        Integer id = Integer.parseInt(lIdLineasPedido.getText());
-        PreparedStatement stmt = null;
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Eliminar");
-        alert.setHeaderText(null);
-        alert.setContentText("¿Seguro que quieres eliminar?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("OK");
-            Conexion conexion = new Conexion();
-            Connection con = conexion.conectar();
-            try {
-                stmt = con.prepareStatement("DELETE from lineasPedido where idLineasPedido=?");
-                stmt.setInt(1, id);
-                stmt.executeUpdate();
-                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                alert1.setTitle("Correcto");
-                alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el elemento ");
-                alert1.showAndWait();
-                
-            } catch (SQLException e) {
-                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                alert2.setTitle("Error");
-                alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado la lineas de pedido ");
-                alert2.showAndWait();
-                
-            } finally {
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    conexion.desconectar(con);
-                }
-            }
+        if (comprobarCampos() == true) {
+            System.out.println("ERROR");
         } else {
-            System.out.println("CANCEL");
-        }
+            Integer id = Integer.parseInt(lIdLineasPedido.getText());
+            PreparedStatement stmt = null;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Seguro que quieres eliminar?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                System.out.println("OK");
+                Conexion conexion = new Conexion();
+                Connection con = conexion.conectar();
+                try {
+                    stmt = con.prepareStatement("DELETE from lineasPedido where idLineasPedido=?");
+                    stmt.setInt(1, id);
+                    stmt.executeUpdate();
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                    alert1.setTitle("Correcto");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" Se ha eliminado el elemento ");
+                    alert1.showAndWait();
 
-        rellenarTableView(lIdPedido.getText());
-        tableView.refresh();
-        noEditable();
-        todoVacio();
+                } catch (SQLException e) {
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Error");
+                    alert2.setHeaderText(null);
+                    alert2.setContentText(" No se ha  eliminado la lineas de pedido ");
+                    alert2.showAndWait();
+
+                } finally {
+                    try {
+                        if (stmt != null) {
+                            stmt.close();
+                        }
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        conexion.desconectar(con);
+                    }
+                }
+            } else {
+                System.out.println("CANCEL");
+            }
+
+            rellenarTableView(lIdPedido.getText());
+            tableView.refresh();
+            noEditable();
+            todoVacio();
+        }
     }
 
     @FXML
     private void botonCrearNuevo(ActionEvent event) {
-        if(comprobarCampos()==true){
+        if (comprobarCampos() == true) {
             System.out.println("Error");
-        
-        }else{
-         todoVacio();
-        siEditable();
 
-        eleccion = 2;
+        } else {
+            todoVacio();
+            siEditable();
 
-        bGuardar.setVisible(true);
-        lIdLineasPedido.setVisible(false);}
+            eleccion = 2;
+
+            bGuardar.setVisible(true);
+            lIdLineasPedido.setVisible(false);
+        }
     }
 
     @FXML
     private void botonGuardar(ActionEvent event) {
-         bGuardar.setVisible(false);
+        bGuardar.setVisible(false);
 
         if (eleccion == 1) {
             if (comprobarCampos() == true) {
@@ -264,7 +268,7 @@ public class Pantalla5Controller implements Initializable {
                 Integer idPedido = Integer.parseInt(lIdPedido.getText());
                 Integer idMaterial = Integer.parseInt(lIdMaterial.getText());
                 Double cantidadMetros = Double.parseDouble(lCantidadMetros.getText());
-                
+
                 PreparedStatement stmt = null;
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Estas seguro?");
@@ -279,7 +283,7 @@ public class Pantalla5Controller implements Initializable {
 
                         stmt = con.prepareStatement("UPDATE lineasPedido SET  idMaterial=?, idPedido=?, cantidadMetros=? WHERE idLineasPedido=?");
                         stmt.setInt(1, idMaterial);
-                        stmt.setInt(2, idPedido); 
+                        stmt.setInt(2, idPedido);
                         stmt.setDouble(3, cantidadMetros);
                         stmt.setInt(4, id);
                         stmt.executeUpdate();
@@ -409,8 +413,8 @@ public class Pantalla5Controller implements Initializable {
 
     @FXML
     private void botonCerrar(ActionEvent event) {
-         Stage stage = (Stage) bcerrar.getScene().getWindow();
+        Stage stage = (Stage) bcerrar.getScene().getWindow();
         stage.close();
     }
-    
+
 }

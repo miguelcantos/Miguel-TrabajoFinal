@@ -200,64 +200,68 @@ public class Pantalla1Controller implements Initializable {
 
     @FXML
     private void botonEliminar(ActionEvent event) {
-        Integer id = Integer.parseInt(lIdEmpleado.getText());
-        PreparedStatement stmt = null;
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Eliminar");
-        alert.setHeaderText(null);
-        alert.setContentText("¿Seguro que quieres eliminar?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("OK");
-            Conexion conexion = new Conexion();
-            Connection con = conexion.conectar();
-            try {
-                stmt = con.prepareStatement("DELETE from empleado where idEmpleado=?");
-                stmt.setInt(1, id);
-                stmt.executeUpdate();
-                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                alert1.setTitle("Correcto");
-                alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el empleado ");
-                alert1.showAndWait();
-                
-            } catch (SQLException e) {
-                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                alert2.setTitle("Error");
-                alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado el empleado ");
-                alert2.showAndWait();
-                
-            } finally {
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    conexion.desconectar(con);
-                }
-            }
+        if (comprobarCampos() == true) {
+            System.out.println("ERROR");
         } else {
-            System.out.println("CANCEL");
+            Integer id = Integer.parseInt(lIdEmpleado.getText());
+            PreparedStatement stmt = null;
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Seguro que quieres eliminar?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                System.out.println("OK");
+                Conexion conexion = new Conexion();
+                Connection con = conexion.conectar();
+                try {
+                    stmt = con.prepareStatement("DELETE from empleado where idEmpleado=?");
+                    stmt.setInt(1, id);
+                    stmt.executeUpdate();
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                    alert1.setTitle("Correcto");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" Se ha eliminado el empleado ");
+                    alert1.showAndWait();
+
+                } catch (SQLException e) {
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Error");
+                    alert2.setHeaderText(null);
+                    alert2.setContentText(" No se ha  eliminado el empleado ");
+                    alert2.showAndWait();
+
+                } finally {
+                    try {
+                        if (stmt != null) {
+                            stmt.close();
+                        }
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        conexion.desconectar(con);
+                    }
+                }
+            } else {
+                System.out.println("CANCEL");
+            }
+
+            rellenarTableView();
+            tableView.refresh();
+            noEditable();
+            todoVacio();
         }
-
-        rellenarTableView();
-        tableView.refresh();
-        noEditable();
-        todoVacio();
-
     }
 
     @FXML
     private void botonModificar(ActionEvent event) {
-        if(comprobarCampos()==true){
+        if (comprobarCampos() == true) {
             System.out.println("ERROR");
-        }else{
-        siEditable();
-        bGuardar.setVisible(true);
-        eleccion = 1;}
+        } else {
+            siEditable();
+            bGuardar.setVisible(true);
+            eleccion = 1;
+        }
     }
 
     @FXML
@@ -278,7 +282,7 @@ public class Pantalla1Controller implements Initializable {
 
         bGuardar.setVisible(false);
 
-        if (eleccion == 1 ) {
+        if (eleccion == 1) {
             if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == true || soloLetras(lNombre.getText()) == true || soloLetras(lApellido.getText()) == true || soloLetras(lCiudad.getText()) == true) {
                 Alert alert0 = new Alert(AlertType.INFORMATION);
                 alert0.setTitle("Error");
@@ -443,7 +447,7 @@ public class Pantalla1Controller implements Initializable {
 
             }
         }
-        
+
     }
 
     @FXML
@@ -451,25 +455,25 @@ public class Pantalla1Controller implements Initializable {
         Stage stage = (Stage) bcerrar.getScene().getWindow();
         stage.close();
     }
-    
-    private  boolean soloNumeros(String a){
 
-          Pattern  p = Pattern.compile("[^0-9]");
-          Matcher m = p.matcher(a);
-          boolean resultado = m.find();
+    private boolean soloNumeros(String a) {
 
-          return resultado;
+        Pattern p = Pattern.compile("[^0-9]");
+        Matcher m = p.matcher(a);
+        boolean resultado = m.find();
+
+        return resultado;
     }
-    
-    private  boolean soloLetras(String a){
 
-          Pattern  p = Pattern.compile("[^A-Za-z]");
-          Matcher m = p.matcher(a);
-          boolean resultado = m.find();
+    private boolean soloLetras(String a) {
 
-          return resultado;
+        Pattern p = Pattern.compile("[^A-Za-z]");
+        Matcher m = p.matcher(a);
+        boolean resultado = m.find();
+
+        return resultado;
     }
-    
+
     private boolean comprobarCampos() {
         boolean solucion = false;
         if (lNombreUsuario.getText() == null

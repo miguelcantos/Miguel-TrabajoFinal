@@ -66,8 +66,7 @@ public class Pantalla4Controller implements Initializable {
     @FXML
     private TableColumn<Pedido, String> tFechaPedido;
 
-    
-     int eleccion = 0;
+    int eleccion = 0;
     ObservableList<Pedido> lista = FXCollections.observableArrayList();
 
     private final ListChangeListener<Pedido> selectorTablaPedido = new ListChangeListener<Pedido>() {
@@ -99,10 +98,10 @@ public class Pantalla4Controller implements Initializable {
             lIdPedido.setText(Integer.toString(pedido.getIdPedido()));
             lIdCliente.setText(Integer.toString(pedido.getIdCliente()));
             lFechaPedido.setValue(LocalDate.parse(pedido.getFechaPedido()));
-           
+
         }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         rellenarTableView();
@@ -114,8 +113,8 @@ public class Pantalla4Controller implements Initializable {
         todoVacio();
         bGuardar.setVisible(false);
         lIdPedido.setEditable(false);
-    }    
-    
+    }
+
     private void todoVacio() {
         lIdPedido.setText(null);
         lIdCliente.setText(null);
@@ -155,96 +154,100 @@ public class Pantalla4Controller implements Initializable {
 
         return solucion;
     }
-    
+
     @FXML
     private void botonModificar(ActionEvent event) {
-        if(comprobarCampos()==true){
+        if (comprobarCampos() == true) {
             System.out.println("ERROR");
-        
-        }else{
-        siEditable();
-        lIdCliente.setEditable(false);
-        bGuardar.setVisible(true);
-        eleccion = 1;}
+
+        } else {
+            siEditable();
+            lIdCliente.setEditable(false);
+            bGuardar.setVisible(true);
+            eleccion = 1;
+        }
     }
 
     @FXML
     private void botonEliminar(ActionEvent event) {
-        Integer id = Integer.parseInt(lIdPedido.getText());
-        PreparedStatement stmt = null;
-        PreparedStatement stmt2 = null;
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Eliminar");
-        alert.setHeaderText(null);
-        alert.setContentText("¿Seguro que quieres eliminar?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("OK");
-            Conexion conexion = new Conexion();
-            Connection con = conexion.conectar();
-            try {
-                stmt = con.prepareStatement("DELETE from lineasPedido where idPedido=?");
-                stmt.setInt(1, id);
-                stmt.executeUpdate();
-                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                alert1.setTitle("Correcto");
-                alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el pedido ");
-                alert1.showAndWait();
+        if (comprobarCampos() == true) {
+            System.out.println("ERROR");
+        } else {
+            Integer id = Integer.parseInt(lIdPedido.getText());
+            PreparedStatement stmt = null;
+            PreparedStatement stmt2 = null;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Seguro que quieres eliminar?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                System.out.println("OK");
+                Conexion conexion = new Conexion();
+                Connection con = conexion.conectar();
                 try {
-                    stmt2 = con.prepareStatement("DELETE from pedido where idPedido=?");
-                    stmt2.setInt(1, id);
-                    stmt2.executeUpdate();
-                    Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
-                    alert10.setTitle("Correcto");
-                    alert10.setHeaderText(null);
-                    alert10.setContentText(" Se ha eliminado el pedido ");
-                    alert10.showAndWait();
+                    stmt = con.prepareStatement("DELETE from lineasPedido where idPedido=?");
+                    stmt.setInt(1, id);
+                    stmt.executeUpdate();
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                    alert1.setTitle("Correcto");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" Se ha eliminado el pedido ");
+                    alert1.showAndWait();
+                    try {
+                        stmt2 = con.prepareStatement("DELETE from pedido where idPedido=?");
+                        stmt2.setInt(1, id);
+                        stmt2.executeUpdate();
+                        Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
+                        alert10.setTitle("Correcto");
+                        alert10.setHeaderText(null);
+                        alert10.setContentText(" Se ha eliminado el pedido ");
+                        alert10.showAndWait();
 
+                    } catch (SQLException e) {
+                        Alert alert20 = new Alert(Alert.AlertType.INFORMATION);
+                        alert20.setTitle("Error");
+                        alert20.setHeaderText(null);
+                        alert20.setContentText(" No se ha  eliminado el pedido ");
+                        alert20.showAndWait();
+
+                    } finally {
+                        try {
+                            if (stmt2 != null) {
+                                stmt2.close();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 } catch (SQLException e) {
-                    Alert alert20 = new Alert(Alert.AlertType.INFORMATION);
-                    alert20.setTitle("Error");
-                    alert20.setHeaderText(null);
-                    alert20.setContentText(" No se ha  eliminado el pedido ");
-                    alert20.showAndWait();
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Error");
+                    alert2.setHeaderText(null);
+                    alert2.setContentText(" No se ha  eliminado el pedido ");
+                    alert2.showAndWait();
 
                 } finally {
                     try {
-                        if (stmt2 != null) {
-                            stmt2.close();
+                        if (stmt != null) {
+                            stmt.close();
                         }
                     } catch (SQLException e) {
                         System.out.println(e.getMessage());
+                    } finally {
+                        conexion.desconectar(con);
                     }
                 }
-            } catch (SQLException e) {
-                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                alert2.setTitle("Error");
-                alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado el pedido ");
-                alert2.showAndWait();
-
-            } finally {
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    conexion.desconectar(con);
-                }
+            } else {
+                System.out.println("CANCEL");
             }
-        } else {
-            System.out.println("CANCEL");
+
+            rellenarTableView();
+            tableView.refresh();
+            noEditable();
+            todoVacio();
+
         }
-
-        rellenarTableView();
-        tableView.refresh();
-        noEditable();
-        todoVacio();
-
-    
     }
 
     @FXML
@@ -260,37 +263,37 @@ public class Pantalla4Controller implements Initializable {
 
     @FXML
     private void botonLineasPedido(ActionEvent event) {
-       if(lIdPedido.getText()==null){
-           System.out.println("Error");
-       
-       }else{
-        
-        try {
-            FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("Pantalla5.fxml"));
-            Parent root1= (Parent)fxmlLoader.load();
-            Stage stage= new Stage();
-            Pantalla5Controller controller = fxmlLoader.<Pantalla5Controller>getController();
-            controller.rellenarTableView(lIdPedido.getText());
-            stage.setScene(new Scene(root1));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
-    
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        if (lIdPedido.getText() == null) {
+            System.out.println("Error");
+
+        } else {
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Pantalla5.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                Pantalla5Controller controller = fxmlLoader.<Pantalla5Controller>getController();
+                controller.rellenarTableView(lIdPedido.getText());
+                stage.setScene(new Scene(root1));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                //stage.initStyle(StageStyle.UNDECORATED);
+                stage.show();
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
-       }
     }
 
     @FXML
     private void botonCerrar(ActionEvent event) {
-         Stage stage = (Stage) bcerrar.getScene().getWindow();
+        Stage stage = (Stage) bcerrar.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void botonGuardar(ActionEvent event) {
-         bGuardar.setVisible(false);
+        bGuardar.setVisible(false);
 
         if (eleccion == 1) {
             if (comprobarCampos() == true) {
@@ -306,7 +309,7 @@ public class Pantalla4Controller implements Initializable {
 
                 Integer id = Integer.parseInt(lIdPedido.getText());
                 Integer idCliente = Integer.parseInt(lIdCliente.getText());
-                Date Fecha = Date.valueOf(lFechaPedido.getValue() );
+                Date Fecha = Date.valueOf(lFechaPedido.getValue());
                 PreparedStatement stmt = null;
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Estas seguro?");
@@ -377,7 +380,7 @@ public class Pantalla4Controller implements Initializable {
                 lIdPedido.setVisible(true);
             } else {
                 Integer idCliente = Integer.parseInt(lIdCliente.getText());
-                Date Fecha = Date.valueOf(lFechaPedido.getValue() );
+                Date Fecha = Date.valueOf(lFechaPedido.getValue());
                 PreparedStatement stmt = null;
                 Alert alert3 = new Alert(Alert.AlertType.CONFIRMATION);
                 alert3.setTitle("Estas seguro");
@@ -447,5 +450,5 @@ public class Pantalla4Controller implements Initializable {
         }
         lIdPedido.setVisible(true);
     }
-    
+
 }

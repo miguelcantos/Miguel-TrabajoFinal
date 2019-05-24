@@ -147,92 +147,95 @@ public class Pantalla3Controller implements Initializable {
 
     @FXML
     private void botonModificar(ActionEvent event) {
-        if(comprobarCampos()==true){
+        if (comprobarCampos() == true) {
             System.out.println("ERROR");
-        }else{
-        siEditable();
-        bGuardar.setVisible(true);
-        eleccion = 1;
+        } else {
+            siEditable();
+            bGuardar.setVisible(true);
+            eleccion = 1;
         }
-        
+
     }
 
     @FXML
     private void botonEliminar(ActionEvent event) {
-        Integer id = Integer.parseInt(lIdMaterial.getText());
-        PreparedStatement stmt = null;
-        PreparedStatement stmt2 = null;
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Eliminar");
-        alert.setHeaderText(null);
-        alert.setContentText("¿Seguro que quieres eliminar?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("OK");
-            Conexion conexion = new Conexion();
-            Connection con = conexion.conectar();
-            try {
-                stmt = con.prepareStatement("DELETE from lineasPedido where idMaterial=?");
-                stmt.setInt(1, id);
-                stmt.executeUpdate();
-                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                alert1.setTitle("Correcto");
-                alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el material ");
-                alert1.showAndWait();
+        if (comprobarCampos() == true) {
+            System.out.println("ERROr");
+        } else {
+            Integer id = Integer.parseInt(lIdMaterial.getText());
+            PreparedStatement stmt = null;
+            PreparedStatement stmt2 = null;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Seguro que quieres eliminar?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                System.out.println("OK");
+                Conexion conexion = new Conexion();
+                Connection con = conexion.conectar();
                 try {
-                    stmt2 = con.prepareStatement("DELETE from material where idMaterial=?");
-                    stmt2.setInt(1, id);
-                    stmt2.executeUpdate();
-                    Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
-                    alert10.setTitle("Correcto");
-                    alert10.setHeaderText(null);
-                    alert10.setContentText(" Se ha eliminado el material");
-                    alert10.showAndWait();
+                    stmt = con.prepareStatement("DELETE from lineasPedido where idMaterial=?");
+                    stmt.setInt(1, id);
+                    stmt.executeUpdate();
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                    alert1.setTitle("Correcto");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" Se ha eliminado el material ");
+                    alert1.showAndWait();
+                    try {
+                        stmt2 = con.prepareStatement("DELETE from material where idMaterial=?");
+                        stmt2.setInt(1, id);
+                        stmt2.executeUpdate();
+                        Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
+                        alert10.setTitle("Correcto");
+                        alert10.setHeaderText(null);
+                        alert10.setContentText(" Se ha eliminado el material");
+                        alert10.showAndWait();
 
+                    } catch (SQLException e) {
+                        Alert alert20 = new Alert(Alert.AlertType.INFORMATION);
+                        alert20.setTitle("Error");
+                        alert20.setHeaderText(null);
+                        alert20.setContentText(" No se ha  eliminado el material ");
+                        alert20.showAndWait();
+
+                    } finally {
+                        try {
+                            if (stmt2 != null) {
+                                stmt2.close();
+                            }
+                        } catch (SQLException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 } catch (SQLException e) {
-                    Alert alert20 = new Alert(Alert.AlertType.INFORMATION);
-                    alert20.setTitle("Error");
-                    alert20.setHeaderText(null);
-                    alert20.setContentText(" No se ha  eliminado el material ");
-                    alert20.showAndWait();
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Error");
+                    alert2.setHeaderText(null);
+                    alert2.setContentText(" No se ha  eliminado el material");
+                    alert2.showAndWait();
 
                 } finally {
                     try {
-                        if (stmt2 != null) {
-                            stmt2.close();
+                        if (stmt != null) {
+                            stmt.close();
                         }
                     } catch (SQLException e) {
                         System.out.println(e.getMessage());
+                    } finally {
+                        conexion.desconectar(con);
                     }
                 }
-            } catch (SQLException e) {
-                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                alert2.setTitle("Error");
-                alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado el material");
-                alert2.showAndWait();
-
-            } finally {
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    conexion.desconectar(con);
-                }
+            } else {
+                System.out.println("CANCEL");
             }
-        } else {
-            System.out.println("CANCEL");
+
+            rellenarTableView();
+            tableView.refresh();
+            noEditable();
+            todoVacio();
         }
-
-        rellenarTableView();
-        tableView.refresh();
-        noEditable();
-        todoVacio();
-
     }
 
     @FXML
@@ -406,7 +409,7 @@ public class Pantalla3Controller implements Initializable {
 
     @FXML
     private void botonCerrar(ActionEvent event) {
-         Stage stage = (Stage) bCerrar.getScene().getWindow();
+        Stage stage = (Stage) bCerrar.getScene().getWindow();
         stage.close();
     }
 
