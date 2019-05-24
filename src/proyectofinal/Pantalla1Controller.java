@@ -252,9 +252,12 @@ public class Pantalla1Controller implements Initializable {
 
     @FXML
     private void botonModificar(ActionEvent event) {
+        if(comprobarCampos()==true){
+            System.out.println("ERROR");
+        }else{
         siEditable();
         bGuardar.setVisible(true);
-        eleccion = 1;
+        eleccion = 1;}
     }
 
     @FXML
@@ -276,7 +279,7 @@ public class Pantalla1Controller implements Initializable {
         bGuardar.setVisible(false);
 
         if (eleccion == 1 ) {
-            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == false || soloLetras(lNombre.getText()) == false || soloLetras(lApellido.getText()) == false || soloLetras(lCiudad.getText()) == false) {
+            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == true || soloLetras(lNombre.getText()) == true || soloLetras(lApellido.getText()) == true || soloLetras(lCiudad.getText()) == true) {
                 Alert alert0 = new Alert(AlertType.INFORMATION);
                 alert0.setTitle("Error");
                 alert0.setHeaderText(null);
@@ -354,7 +357,7 @@ public class Pantalla1Controller implements Initializable {
                 }
             }
         } else if (eleccion == 2) {
-            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == false || soloLetras(lNombre.getText()) == false || soloLetras(lApellido.getText()) == false || soloLetras(lCiudad.getText()) == false) {
+            if (comprobarCampos() == true || soloNumeros(lTelefono.getText()) == true || soloLetras(lNombre.getText()) == true || soloLetras(lApellido.getText()) == true || soloLetras(lCiudad.getText()) == true) {
                 Alert alert0 = new Alert(AlertType.INFORMATION);
                 alert0.setTitle("Error");
                 alert0.setHeaderText(null);
@@ -406,7 +409,7 @@ public class Pantalla1Controller implements Initializable {
                         Alert alert5 = new Alert(AlertType.CONFIRMATION);
                         alert5.setTitle("ERROR");
                         alert5.setHeaderText(null);
-                        alert5.setContentText("No se ha creado el elemento, quierer borrar todo?");
+                        alert5.setContentText("No se ha creado el empleado, quierer borrar todo?");
                         Optional<ButtonType> result2 = alert5.showAndWait();
                         if (result2.isPresent() && result2.get() == ButtonType.OK) {
                             System.out.println("OK");

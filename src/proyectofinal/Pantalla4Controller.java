@@ -158,10 +158,14 @@ public class Pantalla4Controller implements Initializable {
     
     @FXML
     private void botonModificar(ActionEvent event) {
+        if(comprobarCampos()==true){
+            System.out.println("ERROR");
+        
+        }else{
         siEditable();
         lIdCliente.setEditable(false);
         bGuardar.setVisible(true);
-        eleccion = 1;
+        eleccion = 1;}
     }
 
     @FXML
@@ -185,7 +189,7 @@ public class Pantalla4Controller implements Initializable {
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.setTitle("Correcto");
                 alert1.setHeaderText(null);
-                alert1.setContentText(" Se ha eliminado el elemento ");
+                alert1.setContentText(" Se ha eliminado el pedido ");
                 alert1.showAndWait();
                 try {
                     stmt2 = con.prepareStatement("DELETE from pedido where idPedido=?");
@@ -194,14 +198,14 @@ public class Pantalla4Controller implements Initializable {
                     Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
                     alert10.setTitle("Correcto");
                     alert10.setHeaderText(null);
-                    alert10.setContentText(" Se ha eliminado el elemento ");
+                    alert10.setContentText(" Se ha eliminado el pedido ");
                     alert10.showAndWait();
 
                 } catch (SQLException e) {
                     Alert alert20 = new Alert(Alert.AlertType.INFORMATION);
                     alert20.setTitle("Error");
                     alert20.setHeaderText(null);
-                    alert20.setContentText(" No se ha  eliminado el elemento ");
+                    alert20.setContentText(" No se ha  eliminado el pedido ");
                     alert20.showAndWait();
 
                 } finally {
@@ -217,7 +221,7 @@ public class Pantalla4Controller implements Initializable {
                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                 alert2.setTitle("Error");
                 alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado el elemento ");
+                alert2.setContentText(" No se ha  eliminado el pedido ");
                 alert2.showAndWait();
 
             } finally {
@@ -307,7 +311,7 @@ public class Pantalla4Controller implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Estas seguro?");
                 alert.setHeaderText(null);
-                alert.setContentText("¿Seguro que quieres modificar este elemento?");
+                alert.setContentText("¿Seguro que quieres modificar este pedido?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -324,7 +328,7 @@ public class Pantalla4Controller implements Initializable {
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                         alert1.setTitle("Correcto");
                         alert1.setHeaderText(null);
-                        alert1.setContentText(" Se ha modificado el usuario ");
+                        alert1.setContentText(" Se ha modificado el pedido ");
                         alert1.showAndWait();
 
                         rellenarTableView();
@@ -336,7 +340,7 @@ public class Pantalla4Controller implements Initializable {
                         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setTitle("Error");
                         alert2.setHeaderText(null);
-                        alert2.setContentText(" No se ha modificado el usuario ");
+                        alert2.setContentText(" No se ha modificado el pedido ");
                         alert2.showAndWait();
                         rellenarTableView();
                         tableView.refresh();
@@ -378,7 +382,7 @@ public class Pantalla4Controller implements Initializable {
                 Alert alert3 = new Alert(Alert.AlertType.CONFIRMATION);
                 alert3.setTitle("Estas seguro");
                 alert3.setHeaderText(null);
-                alert3.setContentText("¿Seguro que quieres crear este elemento?");
+                alert3.setContentText("¿Seguro que quieres crear este pedido?");
                 Optional<ButtonType> result1 = alert3.showAndWait();
                 if (result1.isPresent() && result1.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -395,7 +399,7 @@ public class Pantalla4Controller implements Initializable {
                         Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
                         alert4.setTitle("Correcto");
                         alert4.setHeaderText(null);
-                        alert4.setContentText(" Se ha creado el usuario ");
+                        alert4.setContentText(" Se ha creado el pedido ");
                         alert4.showAndWait();
 
                         rellenarTableView();
@@ -408,7 +412,7 @@ public class Pantalla4Controller implements Initializable {
                         Alert alert5 = new Alert(Alert.AlertType.CONFIRMATION);
                         alert5.setTitle("ERROR");
                         alert5.setHeaderText(null);
-                        alert5.setContentText("No se ha creado el elemento, quierer borrar todo?");
+                        alert5.setContentText("No se ha creado el pedido, quierer borrar todo?");
                         Optional<ButtonType> result2 = alert5.showAndWait();
                         if (result2.isPresent() && result2.get() == ButtonType.OK) {
                             System.out.println("OK");

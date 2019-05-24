@@ -205,7 +205,7 @@ public class Pantalla5Controller implements Initializable {
                  Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                 alert2.setTitle("Error");
                 alert2.setHeaderText(null);
-                alert2.setContentText(" No se ha  eliminado el elemento ");
+                alert2.setContentText(" No se ha  eliminado la lineas de pedido ");
                 alert2.showAndWait();
                 
             } finally {

@@ -12,7 +12,7 @@ public class Conexion {
         
         try{            
             Class.forName("com.mysql.jdbc.Driver");
-            String url="jdbc:mysql://192.168.1.46/papel?useSSL=false";
+            String url="jdbc:mysql://10.2.1.247/papelmiguel?useSSL=false";
             String user="bd";
             String pass="123abcDEF.";
             con = DriverManager.getConnection(url, user, pass);
