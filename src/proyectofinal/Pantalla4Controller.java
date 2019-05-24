@@ -35,6 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -276,7 +277,7 @@ public class Pantalla4Controller implements Initializable {
                 controller.rellenarTableView(lIdPedido.getText());
                 stage.setScene(new Scene(root1));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                //stage.initStyle(StageStyle.UNDECORATED);
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.show();
 
             } catch (IOException e) {

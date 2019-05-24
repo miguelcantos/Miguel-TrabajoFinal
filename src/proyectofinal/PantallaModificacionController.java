@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -50,7 +51,7 @@ public class PantallaModificacionController implements Initializable {
             Stage stage= new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
     
         } catch (IOException e) {
@@ -65,7 +66,7 @@ public class PantallaModificacionController implements Initializable {
             Stage stage= new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
     
         } catch (IOException e) {
@@ -80,7 +81,7 @@ public class PantallaModificacionController implements Initializable {
             Stage stage= new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
     
         } catch (IOException e) {
@@ -95,7 +96,7 @@ public class PantallaModificacionController implements Initializable {
             Stage stage= new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
     
         } catch (IOException e) {
