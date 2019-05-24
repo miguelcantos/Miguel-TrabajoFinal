@@ -111,6 +111,7 @@ public class Pantalla4Controller implements Initializable {
         tablaClienteSel.addListener(selectorTablaPedido);
 
         this.noEditable();
+        todoVacio();
         bGuardar.setVisible(false);
         lIdPedido.setEditable(false);
     }    
@@ -255,6 +256,11 @@ public class Pantalla4Controller implements Initializable {
 
     @FXML
     private void botonLineasPedido(ActionEvent event) {
+       if(lIdPedido.getText()==null){
+           System.out.println("Error");
+       
+       }else{
+        
         try {
             FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("Pantalla5.fxml"));
             Parent root1= (Parent)fxmlLoader.load();
@@ -267,7 +273,9 @@ public class Pantalla4Controller implements Initializable {
             stage.show();
     
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
+       }
     }
 
     @FXML

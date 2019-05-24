@@ -104,7 +104,6 @@ public class Pantalla5Controller implements Initializable {
      private void todoVacio() {
         lIdLineasPedido.setText(null);
         lIdMaterial.setText(null);
-        lIdPedido.setText(null);
         lCantidadMetros.setText(null);
        
     }
@@ -138,18 +137,20 @@ public class Pantalla5Controller implements Initializable {
         tablaLineasPedidoSel.addListener(selectorTablaLineasPedido);
 
         this.noEditable();
+        todoVacio();
         bGuardar.setVisible(false);
     }
 
     private void siEditable() {
         lIdMaterial.setEditable(true);
-        lIdPedido.setEditable(true);
         lCantidadMetros.setEditable(true);
        
     }
     private boolean comprobarCampos() {
         boolean solucion = false;
-        if (lCantidadMetros.getText() == null) {
+        if (lCantidadMetros.getText() == null
+             ||  lIdPedido.getText() == null
+              || lIdMaterial.getText() == null  ) {
 
             solucion = true;
 
@@ -166,11 +167,15 @@ public class Pantalla5Controller implements Initializable {
 
     @FXML
     private void botonModificar(ActionEvent event) {
+        if(comprobarCampos()==true){
+            System.out.println("Error");
+        
+        }else{
         siEditable();
         lIdMaterial.setEditable(false);
         lIdPedido.setEditable(false);
         bGuardar.setVisible(true);
-        eleccion = 1;
+        eleccion = 1;}
     }
 
     @FXML
@@ -226,13 +231,17 @@ public class Pantalla5Controller implements Initializable {
 
     @FXML
     private void botonCrearNuevo(ActionEvent event) {
+        if(comprobarCampos()==true){
+            System.out.println("Error");
+        
+        }else{
          todoVacio();
         siEditable();
 
         eleccion = 2;
 
         bGuardar.setVisible(true);
-        lIdLineasPedido.setVisible(false);
+        lIdLineasPedido.setVisible(false);}
     }
 
     @FXML
@@ -260,7 +269,7 @@ public class Pantalla5Controller implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Estas seguro?");
                 alert.setHeaderText(null);
-                alert.setContentText("¿Seguro que quieres modificar este elemento?");
+                alert.setContentText("¿Seguro que quieres modificar esta linea de pedido?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -268,16 +277,17 @@ public class Pantalla5Controller implements Initializable {
                     Connection con = conexion.conectar();
                     try {
 
-                        stmt = con.prepareStatement("UPDATE LineasPedido SET  idMaterial=?, idPedido=?, cantidadMetros WHERE idLineasPedido=?");
+                        stmt = con.prepareStatement("UPDATE lineasPedido SET  idMaterial=?, idPedido=?, cantidadMetros=? WHERE idLineasPedido=?");
                         stmt.setInt(1, idMaterial);
                         stmt.setInt(2, idPedido); 
                         stmt.setDouble(3, cantidadMetros);
+                        stmt.setInt(4, id);
                         stmt.executeUpdate();
 
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                         alert1.setTitle("Correcto");
                         alert1.setHeaderText(null);
-                        alert1.setContentText(" Se ha modificado el usuario ");
+                        alert1.setContentText(" Se ha modificado la linea de pedido ");
                         alert1.showAndWait();
 
                         rellenarTableView(lIdPedido.getText());
@@ -289,7 +299,7 @@ public class Pantalla5Controller implements Initializable {
                         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setTitle("Error");
                         alert2.setHeaderText(null);
-                        alert2.setContentText(" No se ha modificado el usuario ");
+                        alert2.setContentText(" No se ha modificado la linea de pedido ");
                         alert2.showAndWait();
                         rellenarTableView(lIdPedido.getText());
                         tableView.refresh();
@@ -332,7 +342,7 @@ public class Pantalla5Controller implements Initializable {
                 Alert alert3 = new Alert(Alert.AlertType.CONFIRMATION);
                 alert3.setTitle("Estas seguro");
                 alert3.setHeaderText(null);
-                alert3.setContentText("¿Seguro que quieres crear este elemento?");
+                alert3.setContentText("¿Seguro que quieres crear esta linea de Pedido?");
                 Optional<ButtonType> result1 = alert3.showAndWait();
                 if (result1.isPresent() && result1.get() == ButtonType.OK) {
                     System.out.println("OK");
@@ -340,8 +350,7 @@ public class Pantalla5Controller implements Initializable {
                     Connection con = conexion.conectar();
                     try {
 
-                        stmt = con.prepareStatement("INSERT INTO pedido ( idMaterial, idPedido, cantidadMetros) VALUES (?, ?, ?)");
-
+                        stmt = con.prepareStatement("INSERT INTO lineasPedido ( idMaterial, idPedido, cantidadMetros) VALUES (?, ?, ?)");
                         stmt.setInt(1, idMaterial);
                         stmt.setInt(2, idPedido);
                         stmt.setDouble(3, cantidadMetros);
@@ -350,7 +359,7 @@ public class Pantalla5Controller implements Initializable {
                         Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
                         alert4.setTitle("Correcto");
                         alert4.setHeaderText(null);
-                        alert4.setContentText(" Se ha creado el usuario ");
+                        alert4.setContentText(" Se ha creado una Linea de Pedido ");
                         alert4.showAndWait();
                         rellenarTableView(lIdPedido.getText());
                         tableView.refresh();
@@ -362,7 +371,7 @@ public class Pantalla5Controller implements Initializable {
                         Alert alert5 = new Alert(Alert.AlertType.CONFIRMATION);
                         alert5.setTitle("ERROR");
                         alert5.setHeaderText(null);
-                        alert5.setContentText("No se ha creado el elemento, quierer borrar todo?");
+                        alert5.setContentText("No se ha creado la Linea de Pedido, quierer borrar todo?");
                         Optional<ButtonType> result2 = alert5.showAndWait();
                         if (result2.isPresent() && result2.get() == ButtonType.OK) {
                             System.out.println("OK");
