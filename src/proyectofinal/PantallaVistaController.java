@@ -334,7 +334,7 @@ public class PantallaVistaController implements Initializable {
         FileChooser fc = new FileChooser();
         fc.setTitle("Guardar Fichero");
         fc.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter(".txt"));
+        new FileChooser.ExtensionFilter("Blog de notas",".txt"));
         Stage stage = (Stage) cerrar.getScene().getWindow();
         File selectFile = fc.showSaveDialog(stage);
         FileWriter fw = null;
